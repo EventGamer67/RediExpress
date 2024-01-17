@@ -13,9 +13,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   late final PageController _pageController;
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     _pageController = PageController();
+    super.initState();
   }
 
   void _pageChanged(int index){
@@ -26,26 +25,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          PageView(
-            controller: _pageController,
-            onPageChanged: (value) {
-              _pageChanged(value);
-            },
-            children: [ Column(
-              children: [
-                SvgPicture.asset('assets/svg/1.svg',width: MediaQuery.of(context).size.width,),
-                const SizedBox(height: 20,)
-              ],
-            ),
-            // Row(
-            //   children: [],
-            // )
-            ]
+      body: SafeArea(
+        child: Container(
+          child: Center(
+            child:
+              PageView(
+                controller: _pageController,
+                onPageChanged: (value) {
+                  _pageChanged(value);
+                },
+                children: [ 
+                  Column(
+                    children: [
+                      SvgPicture.asset('assets/svg/1.svg',width: MediaQuery.of(context).size.width,),
+                      const SizedBox(height: 20,)
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      SvgPicture.asset('assets/svg/2.svg',width: MediaQuery.of(context).size.width,),
+                      const SizedBox(height: 20,)
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      SvgPicture.asset('assets/svg/3.svg',width: MediaQuery.of(context).size.width,),
+                      const SizedBox(height: 20,)
+                    ],
+                  )
+                ]
+              ),
           ),
-        ],
+        ),
       ),
     );
   }
