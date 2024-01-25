@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rediexpress_flutter/presentation/screens/signup_screen/signup_screen.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_outlined.dart';
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
@@ -55,6 +56,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   _goToEnd() {
     _pageController.jumpToPage(2);
+  }
+
+  _goToSignUp(){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SignUpScreen()));
   }
 
   @override
@@ -119,7 +124,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             fontSize: 16,
                             width: double.infinity,
                             height: 46,
-                            onClick: _nextPage,
+                            onClick: _goToSignUp,
                             text: "Sign Up"),
                         const SizedBox(
                           height: 10,
@@ -132,7 +137,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   fontWeight: FontWeight.w400),
                               children: [
                                 TextSpan(
-                                    text: "Sign Up",
+                                    text: "Sign in",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Theme.of(context)

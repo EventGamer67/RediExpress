@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//Класс виджета кнопки заполненного типа
+//25.01 23:36
+//Danil
 class MyButtonFilled extends StatelessWidget {
   final Function onClick;
   final String text;
   final double width;
   final double height;
   final double fontSize;
+
+  //Конструктор
   const MyButtonFilled(
       {super.key,
       required this.onClick,
@@ -18,12 +23,15 @@ class MyButtonFilled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      //Обработка нажатий
       onTap: () {
         onClick.call();
       },
+      //Осоновной контейнер
       child: Container(
         width: width,
         height: height,
+        //Закругление кнопки и ее фон
         decoration: ShapeDecoration(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
@@ -31,6 +39,7 @@ class MyButtonFilled extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
+              //Текст кнопки
               child: Text(text,
                   style: GoogleFonts.roboto(
                       fontSize: fontSize,
