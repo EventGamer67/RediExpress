@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
@@ -58,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               const SizedBox(
-                height: 24,
+                height: 20,
               ),
               MyTextField(
                 hidable: false,
@@ -66,38 +67,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 formatters: [],
                 keyboardtype: TextInputType.name,
                 hint: "Ivanov Ivan",
-                validator: (val){},
+                validator: (val) {},
                 controller: _fioController,
               ),
               const SizedBox(
-                height: 24,
+                height: 20,
               ),
               MyTextField(
                 hidable: false,
                 header: "Phone number",
                 validator: null,
-                formatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  phoneMask
-                ],
+                formatters: [FilteringTextInputFormatter.digitsOnly, phoneMask],
                 keyboardtype: TextInputType.phone,
                 hint: "+7(999)999-99-99",
                 controller: _fioController,
               ),
               const SizedBox(
-                height: 24,
+                height: 20,
               ),
               MyTextField(
                 hidable: false,
-                validator: (value) {
-                    if (value != null && value != "") {
-                      if (EmailValidator.validate(value!)) {
-                      } else {
-                        return 'err';
-                      }
-                    }
-                    return 'err';
-                  },
+                validator: null,
+                // validator: (value) {
+                //   if (value != null && value != "") {
+                //     if (EmailValidator.validate(value!)) {
+                //     } else {
+                //       return 'err';
+                //     }
+                //   }
+                //   return 'err';
+                // },
                 header: "Email adress",
                 formatters: [
                   //idk how to make it
@@ -107,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _fioController,
               ),
               const SizedBox(
-                height: 24,
+                height: 20,
               ),
               MyTextField(
                 validator: null,
@@ -119,7 +118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _fioController,
               ),
               const SizedBox(
-                height: 24,
+                height: 20,
               ),
               MyTextField(
                 validator: null,
@@ -131,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: _fioController,
               ),
               const SizedBox(
-                height: 24,
+                height: 35,
               ),
               Container(
                 alignment: Alignment.centerLeft,
@@ -153,27 +152,84 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             });
                           }),
                     ),
-                    const SizedBox(width: 10,),
-                    LimitedBox(
-                      maxWidth: 300,
-                      child: Expanded(
-                        child: RichText(
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      width: 300,
+                      height: 35,
+                      child: RichText(
                           overflow: TextOverflow.fade,
                           textAlign: TextAlign.center,
                           softWrap: true,
-                            text: TextSpan(
-                          text: 'By ticking this box, you agree to our',
-                          style: GoogleFonts.roboto(color: Theme.of(context).colorScheme.inverseSurface),
-                          children: <TextSpan>[
-                            TextSpan(text: ' Terms and conditions and private policy',style: GoogleFonts.roboto(color: const Color.fromARGB(255, 235, 188, 46) ))
-                          ],
-                        )),
-                      ),
+                          text: TextSpan(
+                            text: 'By ticking this box, you agree to our',
+                            style: GoogleFonts.roboto(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inverseSurface),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text:
+                                      ' Terms and conditions and private policy',
+                                  style: GoogleFonts.roboto(
+                                      color: const Color.fromARGB(
+                                          255, 235, 188, 46)))
+                            ],
+                          )),
                     )
                   ],
                 ),
               ),
-              MyButtonFilled(onClick: (){ Provider.of<ThemeProvider>(context, listen: false).switchTheme(); }, width: double.infinity, height: 45, fontSize: 16, text: "Sign Up")
+              SizedBox(
+                height: 60,
+              ),
+              MyButtonFilled(
+                  enabled: false,
+                  onClick: () {
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .switchTheme();
+                  },
+                  width: double.infinity,
+                  height: 45,
+                  fontSize: 16,
+                  text: "Sign Up"),
+              SizedBox(
+                height: 20,
+              ),
+              RichText(
+                text: TextSpan(
+                    text: "Already have an account? ",
+                    style: const TextStyle(
+                        color: Color(0xFFA6A6A6), fontWeight: FontWeight.w400),
+                    children: [
+                      TextSpan(
+                          text: "Sign in",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).colorScheme.primary))
+                    ]),
+              ),
+              SizedBox(
+                height: 17,
+              ),
+              RichText(
+                text: TextSpan(
+                    text: "Or sign in using",
+                    style: const TextStyle(
+                        color: Color(0xFFA6A6A6), fontWeight: FontWeight.w400),
+                    children: []),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Container(
+                width: 16,
+                height: 16,
+                  child: SvgPicture.asset(
+                'assets/svg/vuesax/linear/Facebook google, apple.svg',
+                
+              ))
             ],
           ),
         ),

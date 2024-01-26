@@ -9,11 +9,13 @@ class MyButtonFilled extends StatelessWidget {
   final String text;
   final double width;
   final double height;
+  final bool enabled;
   final double fontSize;
 
   //Конструктор
   const MyButtonFilled(
       {super.key,
+      required this.enabled,
       required this.onClick,
       required this.width,
       required this.height,
@@ -24,9 +26,9 @@ class MyButtonFilled extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       //Обработка нажатий
-      onTap: () {
+      onTap: this.enabled ? () {
         onClick.call();
-      },
+      } : null,
       //Осоновной контейнер
       child: Container(
         width: width,
@@ -35,7 +37,7 @@ class MyButtonFilled extends StatelessWidget {
         decoration: ShapeDecoration(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-            color: const Color.fromARGB(255, 5, 95, 250)),
+            color: this.enabled? const Color.fromARGB(255, 5, 95, 250) : Color.fromARGB(255, 167, 167, 167)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(

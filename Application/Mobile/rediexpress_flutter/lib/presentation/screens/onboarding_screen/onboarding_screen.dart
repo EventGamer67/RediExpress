@@ -121,6 +121,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ? Column(
                       children: [
                         MyButtonFilled(
+                          enabled: true,
                             fontSize: 16,
                             width: double.infinity,
                             height: 46,
@@ -161,6 +162,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             text: "Skip",
                           ),
                           MyButtonFilled(
+                              enabled: true,
                               fontSize: 14,
                               onClick: _nextPage,
                               width: 100,
