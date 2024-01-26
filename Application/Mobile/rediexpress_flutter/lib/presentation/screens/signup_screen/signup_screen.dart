@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_textfield.dart';
+import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -12,6 +15,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   late final TextEditingController _fioController;
+  bool termCB = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -22,6 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -43,12 +49,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w600,
                         fontSize: 15,
-                        color: Color.fromARGB(255, 167, 167, 167),
+                        color: const Color.fromARGB(255, 167, 167, 167),
                       ))
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             MyTextField(
@@ -59,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               hint: "Ivanov Ivan",
               controller: _fioController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             MyTextField(
@@ -72,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               hint: "+7(999)999-99-99",
               controller: _fioController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             MyTextField(
@@ -85,30 +91,72 @@ class _SignUpScreenState extends State<SignUpScreen> {
               hint: "*********@gmail.com",
               controller: _fioController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             MyTextField(
               hidable: true,
               header: "Password",
-              formatters: [
-              ],
+              formatters: [],
               keyboardtype: TextInputType.phone,
               hint: "********",
               controller: _fioController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             MyTextField(
               hidable: true,
               header: "Confirm Password",
-              formatters: [
-              ],
+              formatters: [],
               keyboardtype: TextInputType.none,
               hint: "********",
               controller: _fioController,
-            )
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Checkbox(
+                        side: BorderSide(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 1),
+                        activeColor: Theme.of(context).colorScheme.primary,
+                        value: termCB,
+                        onChanged: (value) {
+                          setState(() {
+                            termCB = value ?? false;
+                          });
+                        }),
+                  ),
+                  const SizedBox(width: 10,),
+                  LimitedBox(
+                    maxWidth: 300,
+                    child: Expanded(
+                      child: RichText(
+                        overflow: TextOverflow.fade,
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                          text: TextSpan(
+                        text: 'By ticking this box, you agree to our',
+                        style: GoogleFonts.roboto(color: Theme.of(context).colorScheme.inverseSurface),
+                        children: <TextSpan>[
+                          TextSpan(text: ' Terms and conditions and private policy',style: GoogleFonts.roboto(color: const Color.fromARGB(255, 235, 188, 46) ))
+                        ],
+                      )),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            MyButtonFilled(onClick: (){ Provider.of<ThemeProvider>(context, listen: false).switchTheme(); }, width: double.infinity, height: 45, fontSize: 16, text: "Sign Up")
           ],
         ),
       ),

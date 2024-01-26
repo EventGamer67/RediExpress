@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyTextField extends StatefulWidget {
@@ -66,9 +67,16 @@ class _MyTextFieldState extends State<MyTextField> {
                           onTap: () {
                             _toggleHide();
                           },
-                          child: Icon(Icons.abc,
-                              color:
-                                  Theme.of(context).colorScheme.inverseSurface))
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                                hided ? 'assets/svg/vuesax/linear/eye-slash.svg' : 'assets/svg/vuesax/linear/eye.svg',
+                                alignment: Alignment.center,
+                                color:
+                                    Theme.of(context).colorScheme.inverseSurface),
+                          ))
                       : null,
                   errorStyle: GoogleFonts.roboto(
                       fontSize: 16,

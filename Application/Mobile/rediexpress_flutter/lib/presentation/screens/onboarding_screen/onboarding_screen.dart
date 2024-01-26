@@ -45,7 +45,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _pageChanged(int index) {
-    this.pageIndex = index;
+    pageIndex = index;
     setState(() {});
   }
 
