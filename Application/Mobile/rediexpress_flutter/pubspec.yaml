@@ -39,6 +39,8 @@ dependencies:
   provider: ^6.1.1
   google_fonts: ^6.1.0
   path_provider: ^2.1.2
+  mask_text_input_formatter: ^2.8.0
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:
