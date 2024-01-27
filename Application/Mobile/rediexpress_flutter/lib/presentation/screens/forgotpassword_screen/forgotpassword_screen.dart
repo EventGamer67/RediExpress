@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
@@ -21,6 +20,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void initState() {
     _fioController = TextEditingController();
     super.initState();
+
   }
 
   @override
@@ -40,13 +40,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome back",
+                      "Forgot password",
                       style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,
                           color: Theme.of(context).colorScheme.inverseSurface),
                     ),
-                    Text("Fill in your email and password to continue",
+                    Text("Enter your email address",
                         style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
                           fontSize: 15,
@@ -56,7 +56,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 56,
               ),
               MyTextField(
                 hidable: false,
@@ -79,66 +79,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 controller: _fioController,
               ),
               const SizedBox(
-                height: 20,
-              ),
-              MyTextField(
-                validator: null,
-                hidable: true,
-                header: "Password",
-                formatters: const [],
-                keyboardtype: TextInputType.phone,
-                hint: "********",
-                controller: _fioController,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: Checkbox(
-                              side: BorderSide(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  width: 1),
-                              activeColor:
-                                  Theme.of(context).colorScheme.primary,
-                              value: termCB,
-                              onChanged: (value) {
-                                setState(() {
-                                  termCB = value ?? false;
-                                });
-                              }),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Remember password',
-                          style: GoogleFonts.roboto(
-                              color:
-                                  Theme.of(context).colorScheme.inverseSurface),
-                        )
-                      ],
-                    ),
-                    Text(
-                      'Forgot Password?',
-                      style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).colorScheme.primary),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 190,
+                height: 56,
               ),
               MyButtonFilled(
                   enabled: false,
@@ -149,13 +90,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   width: double.infinity,
                   height: 45,
                   fontSize: 16,
-                  text: "Log in"),
+                  text: "Send OTP"),
               const SizedBox(
                 height: 20,
               ),
               RichText(
                 text: TextSpan(
-                    text: "Already have an account? ",
+                    text: "Remember password ",
                     style: const TextStyle(
                         color: Color(0xFFA6A6A6), fontWeight: FontWeight.w400),
                     children: [
@@ -166,25 +107,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               color: Theme.of(context).colorScheme.primary))
                     ]),
               ),
-              const SizedBox(
-                height: 17,
-              ),
-              RichText(
-                text: const TextSpan(
-                    text: "Or sign in using",
-                    style: TextStyle(
-                        color: Color(0xFFA6A6A6), fontWeight: FontWeight.w400),
-                    children: []),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: SvgPicture.asset(
-                    'assets/svg/vuesax/linear/Facebook google, apple.svg',
-                  ))
             ],
           ),
         ),

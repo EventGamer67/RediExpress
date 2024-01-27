@@ -43,6 +43,7 @@ dependencies:
   email_validator: ^2.1.17
   get_it: ^7.6.7
   talker_flutter: ^3.6.0
+  dcdg: ^4.1.0
 
 dev_dependencies:
   flutter_test:

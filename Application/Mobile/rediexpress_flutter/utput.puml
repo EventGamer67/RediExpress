@@ -1,0 +1,140 @@
+@startuml
+scale 1000 width
+scale 500 height
+set namespaceSeparator ::
+class "rediexpress_flutter::providers::theme::theme_provider.dart::ThemeProvider" {
+  +ThemeData theme
+  +dynamic switchTheme()
+}
+"rediexpress_flutter::providers::theme::theme_provider.dart::ThemeProvider" o-- "flutter::src::material::theme_data.dart::ThemeData"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "rediexpress_flutter::providers::theme::theme_provider.dart::ThemeProvider"
+
+class "rediexpress_flutter::main.dart::MyApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rediexpress_flutter::main.dart::MyApp"
+
+class "rediexpress_flutter::presentation::screens::login_screen::login_screen.dart::LoginScreen" {
+  +State<LoginScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rediexpress_flutter::presentation::screens::login_screen::login_screen.dart::LoginScreen"
+
+class "rediexpress_flutter::presentation::screens::login_screen::login_screen.dart::_LoginScreenState" {
+  -TextEditingController _fioController
+  +bool termCB
+  +void initState()
+  +Widget build()
+}
+
+"rediexpress_flutter::presentation::screens::login_screen::login_screen.dart::_LoginScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "rediexpress_flutter::presentation::screens::login_screen::login_screen.dart::_LoginScreenState"
+
+class "rediexpress_flutter::presentation::screens::signup_screen::signup_screen.dart::SignUpScreen" {
+  +State<SignUpScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rediexpress_flutter::presentation::screens::signup_screen::signup_screen.dart::SignUpScreen"
+
+class "rediexpress_flutter::presentation::screens::signup_screen::signup_screen.dart::_SignUpScreenState" {
+  -TextEditingController _fioController
+  +bool termCB
+  +void initState()
+  +Widget build()
+}
+
+"rediexpress_flutter::presentation::screens::signup_screen::signup_screen.dart::_SignUpScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "rediexpress_flutter::presentation::screens::signup_screen::signup_screen.dart::_SignUpScreenState"
+
+class "rediexpress_flutter::presentation::screens::forgotpassword_screen::forgotpassword_screen.dart::ForgotPasswordScreen" {
+  +State<ForgotPasswordScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rediexpress_flutter::presentation::screens::forgotpassword_screen::forgotpassword_screen.dart::ForgotPasswordScreen"
+
+class "rediexpress_flutter::presentation::screens::forgotpassword_screen::forgotpassword_screen.dart::_ForgotPasswordScreenState" {
+  -TextEditingController _fioController
+  +bool termCB
+  +void initState()
+  +Widget build()
+}
+
+"rediexpress_flutter::presentation::screens::forgotpassword_screen::forgotpassword_screen.dart::_ForgotPasswordScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "rediexpress_flutter::presentation::screens::forgotpassword_screen::forgotpassword_screen.dart::_ForgotPasswordScreenState"
+
+class "rediexpress_flutter::presentation::screens::splash_screen::splash_screen.dart::SplashScreen" {
+  +State<SplashScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rediexpress_flutter::presentation::screens::splash_screen::splash_screen.dart::SplashScreen"
+
+class "rediexpress_flutter::presentation::screens::splash_screen::splash_screen.dart::_SplashScreenState" {
+  +void initState()
+  +void goNext()
+  +Widget build()
+}
+"flutter::src::widgets::framework.dart::State" <|-- "rediexpress_flutter::presentation::screens::splash_screen::splash_screen.dart::_SplashScreenState"
+class "rediexpress_flutter::presentation::screens::onboarding_screen::onboarding_screen.dart::OnboardingScreen" {
+  +State<OnboardingScreen> createState()
+}
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rediexpress_flutter::presentation::screens::onboarding_screen::onboarding_screen.dart::OnboardingScreen"
+class "rediexpress_flutter::presentation::screens::onboarding_screen::onboarding_screen.dart::_OnboardingScreenState" {
+  -PageController _pageController
+  +int pageIndex
+  +List<OnBoardPageInfo> pages
+  +void initState()
+  -void _pageChanged()
+  -dynamic _nextPage()
+  -dynamic _goToEnd()
+  -dynamic _goToSignUp()
+  +Widget build()
+}
+"rediexpress_flutter::presentation::screens::onboarding_screen::onboarding_screen.dart::_OnboardingScreenState" o-- "flutter::src::widgets::page_view.dart::PageController"
+"flutter::src::widgets::framework.dart::State" <|-- "rediexpress_flutter::presentation::screens::onboarding_screen::onboarding_screen.dart::_OnboardingScreenState"
+class "rediexpress_flutter::presentation::screens::onboarding_screen::onboarding_screen.dart::OnBoardPageInfo" {
+  +String desc
+  +String title
+  +String image
+}
+class "rediexpress_flutter::presentation::widgets::my_textfield.dart::MyTextField" {
+  +List<TextInputFormatter> formatters
+  +String header
+  +String hint
+  +bool hidable
+  +TextEditingController controller
+  +TextInputType keyboardtype
+  +String? Function(String?)? validator
+  +State<MyTextField> createState()
+}
+"rediexpress_flutter::presentation::widgets::my_textfield.dart::MyTextField" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"rediexpress_flutter::presentation::widgets::my_textfield.dart::MyTextField" o-- "flutter::src::services::text_input.dart::TextInputType"
+"rediexpress_flutter::presentation::widgets::my_textfield.dart::MyTextField" o-- "null::String Function(String)"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "rediexpress_flutter::presentation::widgets::my_textfield.dart::MyTextField"
+class "rediexpress_flutter::presentation::widgets::my_textfield.dart::_MyTextFieldState" {
+  +bool hided
+  +bool correct
+  +void initState()
+  -dynamic _toggleHide()
+  +Widget build()
+}
+"flutter::src::widgets::framework.dart::State" <|-- "rediexpress_flutter::presentation::widgets::my_textfield.dart::_MyTextFieldState"
+class "rediexpress_flutter::presentation::widgets::my_button_filled.dart::MyButtonFilled" {
+  +Function onClick
+  +String text
+  +double width
+  +double height
+  +bool enabled
+  +double fontSize
+  +Widget build()
+}
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rediexpress_flutter::presentation::widgets::my_button_filled.dart::MyButtonFilled"
+class "rediexpress_flutter::presentation::widgets::my_button_outlined.dart::MyButtonOutlined" {
+  +Function onClick
+  +String text
+  +double width
+  +double height
+  +Widget build()
+}
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "rediexpress_flutter::presentation::widgets::my_button_outlined.dart::MyButtonOutlined"
+@enduml
