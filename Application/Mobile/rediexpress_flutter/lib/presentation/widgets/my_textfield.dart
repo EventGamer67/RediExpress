@@ -1,4 +1,3 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,7 +32,6 @@ class _MyTextFieldState extends State<MyTextField> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -49,7 +47,7 @@ class _MyTextFieldState extends State<MyTextField> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(this.widget.header,
+        Text(widget.header,
             style: GoogleFonts.roboto(
                 color: const Color.fromARGB(255, 167, 167, 167),
                 fontWeight: FontWeight.w600,
@@ -66,10 +64,10 @@ class _MyTextFieldState extends State<MyTextField> {
                 inputFormatters: widget.formatters,
                 textAlignVertical: TextAlignVertical.bottom,
                 style: GoogleFonts.roboto(color: correct ? Theme.of(context).colorScheme.inverseSurface :Theme.of(context).colorScheme.error ),
-                keyboardType: this.widget.keyboardtype,
-                validator: this.widget.validator,
+                keyboardType: widget.keyboardtype,
+                validator: widget.validator,
                 decoration: InputDecoration(
-                    suffixIcon: this.widget.hidable
+                    suffixIcon: widget.hidable
                         ? GestureDetector(
                             onTap: () {
                               _toggleHide();
@@ -88,7 +86,7 @@ class _MyTextFieldState extends State<MyTextField> {
                                       .inverseSurface),
                             ))
                         : null,
-                    errorStyle: TextStyle(fontSize: 0),
+                    errorStyle: const TextStyle(fontSize: 0),
                     errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             width: 1,
@@ -97,7 +95,7 @@ class _MyTextFieldState extends State<MyTextField> {
                         borderSide: BorderSide(
                             width: 1,
                             color: Color.fromARGB(255, 167, 167, 167))),
-                    hintText: this.widget.hint,
+                    hintText: widget.hint,
                     hintStyle: GoogleFonts.roboto(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,

@@ -26,7 +26,7 @@ class MyButtonFilled extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       //Обработка нажатий
-      onTap: this.enabled ? () {
+      onTap: enabled ? () {
         onClick.call();
       } : null,
       //Осоновной контейнер
@@ -37,7 +37,7 @@ class MyButtonFilled extends StatelessWidget {
         decoration: ShapeDecoration(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-            color: this.enabled? const Color.fromARGB(255, 5, 95, 250) : Color.fromARGB(255, 167, 167, 167)),
+            color: enabled? const Color.fromARGB(255, 5, 95, 250) : const Color.fromARGB(255, 167, 167, 167)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(

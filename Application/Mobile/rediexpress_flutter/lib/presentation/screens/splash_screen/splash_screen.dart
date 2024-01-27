@@ -10,16 +10,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
+  
   @override
   void initState() {
     super.initState();
-    goNext();
+    goNext(context);
   }
 
-  void goNext() async {
+  void goNext(context) async {
     await Future.delayed(const Duration(seconds: 2));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const OnboardingScreen()));
   }
 
   @override

@@ -20,8 +20,8 @@ class MyButtonOutlined extends StatelessWidget {
         onClick.call();
       },
       child: Container(
-        width: this.width,
-        height: this.height,
+        width: width,
+        height: height,
         decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),

@@ -1,22 +1,20 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:rediexpress_flutter/presentation/screens/login_screen/login_screen.dart';
+import 'package:rediexpress_flutter/presentation/screens/forgotpassword_screen/forgotpassword_screen.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_textfield.dart';
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   late final TextEditingController _fioController;
   bool termCB = false;
 
@@ -43,13 +41,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Create an account",
+                      "Welcome back",
                       style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,
                           color: Theme.of(context).colorScheme.inverseSurface),
                     ),
-                    Text("Complete the sign up process to get started",
+                    Text("Fill in your email and password to continue",
                         style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
                           fontSize: 15,
@@ -57,32 +55,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ))
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              MyTextField(
-                hidable: false,
-                header: "Full name",
-                formatters: const [],
-                keyboardtype: TextInputType.name,
-                hint: "Ivanov Ivan",
-                validator: (val) {
-                  return null;
-                },
-                controller: _fioController,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              MyTextField(
-                hidable: false,
-                header: "Phone number",
-                validator: null,
-                formatters: [FilteringTextInputFormatter.digitsOnly, phoneMask],
-                keyboardtype: TextInputType.phone,
-                hint: "+7(999)999-99-99",
-                controller: _fioController,
               ),
               const SizedBox(
                 height: 20,
@@ -122,69 +94,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 20,
               ),
-              MyTextField(
-                validator: null,
-                hidable: true,
-                header: "Confirm Password",
-                formatters: const [],
-                keyboardtype: TextInputType.none,
-                hint: "********",
-                controller: _fioController,
-              ),
-              const SizedBox(
-                height: 35,
-              ),
               Container(
                 alignment: Alignment.centerLeft,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: Checkbox(
-                          side: BorderSide(
-                              color: Theme.of(context).colorScheme.primary,
-                              width: 1),
-                          activeColor: Theme.of(context).colorScheme.primary,
-                          value: termCB,
-                          onChanged: (value) {
-                            setState(() {
-                              termCB = value ?? false;
-                            });
-                          }),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: Checkbox(
+                              side: BorderSide(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  width: 1),
+                              activeColor:
+                                  Theme.of(context).colorScheme.primary,
+                              value: termCB,
+                              onChanged: (value) {
+                                setState(() {
+                                  termCB = value ?? false;
+                                });
+                              }),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Remember password',
+                          style: GoogleFonts.roboto(
+                              color:
+                                  Theme.of(context).colorScheme.inverseSurface),
+                        )
+                      ],
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    SizedBox(
-                      width: 300,
-                      height: 35,
-                      child: RichText(
-                          overflow: TextOverflow.fade,
-                          textAlign: TextAlign.center,
-                          softWrap: true,
-                          text: TextSpan(
-                            text: 'By ticking this box, you agree to our',
-                            style: GoogleFonts.roboto(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .inverseSurface),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text:
-                                      ' Terms and conditions and private policy',
-                                  style: GoogleFonts.roboto(
-                                      color: const Color.fromARGB(
-                                          255, 235, 188, 46)))
-                            ],
-                          )),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const ForgotPasswordScreen() ));
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
                     )
                   ],
                 ),
               ),
               const SizedBox(
-                height: 60,
+                height: 190,
               ),
               MyButtonFilled(
                   enabled: false,
@@ -195,7 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: double.infinity,
                   height: 45,
                   fontSize: 16,
-                  text: "Sign Up"),
+                  text: "Log in"),
               const SizedBox(
                 height: 20,
               ),
@@ -206,13 +166,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Color(0xFFA6A6A6), fontWeight: FontWeight.w400),
                     children: [
                       TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LoginScreen()));
-                            },
                           text: "Sign in",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,

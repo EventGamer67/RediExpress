@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rediexpress_flutter/presentation/screens/login_screen/login_screen.dart';
 import 'package:rediexpress_flutter/presentation/screens/signup_screen/signup_screen.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_outlined.dart';
@@ -58,8 +60,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     _pageController.jumpToPage(2);
   }
 
-  _goToSignUp(){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SignUpScreen()));
+  _goToSignUp() {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const SignUpScreen()));
   }
 
   @override
@@ -121,7 +124,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ? Column(
                       children: [
                         MyButtonFilled(
-                          enabled: true,
+                            enabled: true,
                             fontSize: 16,
                             width: double.infinity,
                             height: 46,
@@ -138,6 +141,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   fontWeight: FontWeight.w400),
                               children: [
                                 TextSpan(
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const LoginScreen()));
+                                      },
                                     text: "Sign in",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
