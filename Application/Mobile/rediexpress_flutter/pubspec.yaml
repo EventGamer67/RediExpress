@@ -44,6 +44,8 @@ dependencies:
   get_it: ^7.6.7
   talker_flutter: ^3.6.0
   dcdg: ^4.1.0
+  supabase_flutter: ^2.3.1
+  pinput: ^3.0.1
 
 dev_dependencies:
   flutter_test:
