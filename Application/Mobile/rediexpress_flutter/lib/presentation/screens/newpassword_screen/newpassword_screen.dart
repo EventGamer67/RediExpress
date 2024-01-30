@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rediexpress_flutter/presentation/screens/otp_screen/otp_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:rediexpress_flutter/presentation/screens/home_screen/home_screen.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_textfield.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class NewPasswordScreen extends StatefulWidget {
+  const NewPasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  late final TextEditingController _fioController;
-  bool termCB = false;
+class _NewPasswordScreenState extends State<NewPasswordScreen> {
+  late final passwordcontroller;
+  late final retrypasswordcontroller;
 
   @override
   void initState() {
-    _fioController = TextEditingController();
+    // TODO: implement initState
     super.initState();
-
+    passwordcontroller = TextEditingController();
+    retrypasswordcontroller = TextEditingController();
   }
 
   @override
@@ -41,13 +43,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Forgot password",
+                      "New Password",
                       style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,
                           color: Theme.of(context).colorScheme.inverseSurface),
                     ),
-                    Text("Enter your email address",
+                    Text("Enter new password",
                         style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
                           fontSize: 15,
@@ -57,10 +59,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
               ),
               const SizedBox(
-                height: 56,
+                height: 70,
               ),
               MyTextField(
-                hidable: false,
+                hidable: true,
                 validator: null,
                 // validator: (value) {
                 //   if (value != null && value != "") {
@@ -71,48 +73,39 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 //   }
                 //   return 'err';
                 // },
-                header: "Email adress",
+                header: "Password",
                 formatters: const [
                   //idk how to make it
                 ],
                 keyboardtype: TextInputType.emailAddress,
-                hint: "*********@gmail.com",
-                controller: _fioController,
+                hint: "********",
+                controller: passwordcontroller,
               ),
               const SizedBox(
-                height: 56,
+                height: 20,
+              ),
+              MyTextField(
+                validator: null,
+                hidable: true,
+                header: "Confirm Password",
+                formatters: const [],
+                keyboardtype: TextInputType.phone,
+                hint: "********",
+                controller: retrypasswordcontroller,
+              ),
+              const SizedBox(
+                height: 70,
               ),
               MyButtonFilled(
                   enabled: true,
-                  onClick: () async {
-                    try{
-                      final client = GetIt.I.get<Supabase>().client;
-                      await client.auth.resetPasswordForEmail('eventgamer67danil@yandex.ru');
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OTPScreen() ));
-                    }catch(err){
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.toString())));
-                    }
+                  onClick: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen() ));
+
                   },
                   width: double.infinity,
                   height: 45,
                   fontSize: 16,
-                  text: "Send OTP"),
-              const SizedBox(
-                height: 20,
-              ),
-              RichText(
-                text: TextSpan(
-                    text: "Remember password ",
-                    style: const TextStyle(
-                        color: Color(0xFFA6A6A6), fontWeight: FontWeight.w400),
-                    children: [
-                      TextSpan(
-                          text: "Sign in",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: Theme.of(context).colorScheme.primary))
-                    ]),
-              ),
+                  text: "Log in"),
             ],
           ),
         ),

@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:talker_flutter/talker_flutter.dart';
+
+import '../newpassword_screen/newpassword_screen.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({super.key});
@@ -20,6 +23,12 @@ class _OTPScreenState extends State<OTPScreen> {
   late Timer timer;
   late final TextEditingController controller;
   String remainTime = '';
+
+  @override
+  void dispose(){
+    timer.cancel();
+    super.dispose();
+  }
 
   _timerTick(Timer timer) {
     GetIt.I.get<Talker>().critical(timer);
@@ -61,7 +70,7 @@ class _OTPScreenState extends State<OTPScreen> {
               type: OtpType.email);
       GetIt.I.get<Talker>().good(response.session!.tokenType.toString());
       GetIt.I.get<Supabase>().client.auth.updateUser(UserAttributes());
-      //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => NewPasswordScreen()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => NewPasswordScreen()));
       
     } catch (error) {
       GetIt.I.get<Talker>().critical(error);

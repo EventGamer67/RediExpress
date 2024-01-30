@@ -73,6 +73,7 @@ flutter:
     - assets/svg/
     - assets/svg/vuesax/bold/
     - assets/svg/vuesax/linear/
+    - assets/svg/vuesax/navbar/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

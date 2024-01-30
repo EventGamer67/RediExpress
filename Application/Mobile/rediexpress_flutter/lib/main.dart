@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:rediexpress_flutter/presentation/screens/home_screen/home_screen.dart';
 import 'package:rediexpress_flutter/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           theme: Provider.of<ThemeProvider>(context).theme,
-          home: const SplashScreen(),
+          home: HomeScreen()
+          //home: const SplashScreen(),
         );
       },
     );
