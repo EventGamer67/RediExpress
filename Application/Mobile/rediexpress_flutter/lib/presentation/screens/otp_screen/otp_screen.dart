@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
-import 'package:rediexpress_flutter/presentation/widgets/my_textfield.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
@@ -61,8 +60,8 @@ class _OTPScreenState extends State<OTPScreen> {
               token: text,
               type: OtpType.email);
       GetIt.I.get<Talker>().good(response.session!.tokenType.toString());
-      GetIt.I.get<Supabase>().client.auth.updateUser(UserAttributes())
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => NewPasswordScreen()));
+      GetIt.I.get<Supabase>().client.auth.updateUser(UserAttributes());
+      //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => NewPasswordScreen()));
       
     } catch (error) {
       GetIt.I.get<Talker>().critical(error);
