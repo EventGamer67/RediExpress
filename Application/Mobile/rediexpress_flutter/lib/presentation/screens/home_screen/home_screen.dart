@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _goToPage(int index) {
     pageController.animateToPage(index,
-        duration: Duration(microseconds: 300), curve: Curves.easeOut);
+        duration: const Duration(microseconds: 300), curve: Curves.easeOut);
   }
 
   @override
@@ -28,20 +28,20 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: PageView(
           controller: pageController,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (value) {},
-          children: [
+          children: const [
             Center(child: Text("Home")),
             Center(child: Text("Home2")),
             Center(child: Text("Home2")),
           ],
         ),
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         height: 110,
         child: Stack(children: [
           Container(
-            margin: EdgeInsets.only(top: 7),
+            margin: const EdgeInsets.only(top: 7),
             height: double.infinity,
             alignment: Alignment.bottomLeft,
             width: double.infinity,
@@ -53,6 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ]),
           ),
           BottomNavigationBar(
+            onTap: (value) {
+              _goToPage(value);
+            },
             enableFeedback: false,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -67,16 +70,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -85,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -98,16 +101,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -116,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -132,16 +135,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -150,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -163,16 +166,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -181,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -197,16 +200,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -215,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -228,16 +231,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -246,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -262,16 +265,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -280,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -293,16 +296,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -311,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -327,16 +330,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -345,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],
@@ -358,16 +361,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 3,
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
                                   color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                   blurRadius: 2,
                                   spreadRadius: 0.5)
                             ]),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       SvgPicture.asset(
@@ -376,7 +379,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 24,
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                     ],

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/presentation/screens/home_screen/home_screen.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_textfield.dart';
-import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   const NewPasswordScreen({super.key});
@@ -20,7 +17,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     passwordcontroller = TextEditingController();
     retrypasswordcontroller = TextEditingController();

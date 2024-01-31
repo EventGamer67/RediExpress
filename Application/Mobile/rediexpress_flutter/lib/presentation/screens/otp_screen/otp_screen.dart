@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
-import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -70,7 +69,7 @@ class _OTPScreenState extends State<OTPScreen> {
               type: OtpType.email);
       GetIt.I.get<Talker>().good(response.session!.tokenType.toString());
       GetIt.I.get<Supabase>().client.auth.updateUser(UserAttributes());
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => NewPasswordScreen()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NewPasswordScreen()));
       
     } catch (error) {
       GetIt.I.get<Talker>().critical(error);
@@ -121,31 +120,29 @@ class _OTPScreenState extends State<OTPScreen> {
               const SizedBox(
                 height: 56,
               ),
-              Container(
-                child: Pinput(
-                  length: 6,
-                  onCompleted: (value) {
-                    _verifyOTP(value);
-                  },
-                  keyboardType: TextInputType.number,
-                  controller: controller,
-                  defaultPinTheme: PinTheme(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 1,
-                              color: const Color.fromARGB(255, 167, 167, 167))),
-                      width: 32,
-                      height: 32),
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                ),
+              Pinput(
+                length: 6,
+                onCompleted: (value) {
+                  _verifyOTP(value);
+                },
+                keyboardType: TextInputType.number,
+                controller: controller,
+                defaultPinTheme: PinTheme(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 1,
+                            color: const Color.fromARGB(255, 167, 167, 167))),
+                    width: 32,
+                    height: 32),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
               const SizedBox(
                 height: 30,
               ),
-              Text("If you didn’t receive code, resend after ${remainTime}",
+              Text("If you didn’t receive code, resend after $remainTime",
                   style: TextStyle(
                       color: timer.isActive
-                          ? Color.fromARGB(255, 167, 167, 167)
+                          ? const Color.fromARGB(255, 167, 167, 167)
                           : Colors.transparent)),
               const SizedBox(
                 height: 80,

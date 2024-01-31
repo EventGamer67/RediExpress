@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData.light().copyWith(
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedLabelStyle: TextStyle(color:Color(0xFF0560FA),),
       selectedItemColor: Color(0xFF0560FA),
       showUnselectedLabels: true,
