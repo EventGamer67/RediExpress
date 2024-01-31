@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/home_page.dart';
 import 'package:rediexpress_flutter/presentation/screens/pages/profile_page.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/track_page.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/wallet_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -92,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-final pages = [ const ProfilePage(),const ProfilePage(),const ProfilePage(),const ProfilePage() ];
+final pages = [ const HomePage(),const WalletPage(),const TrackPage(),const ProfilePage() ];
 
 List<NavBarIcon> navbarWidgets = [
   const NavBarIcon(
