@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/add_payment_method.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/notification_page.dart';
 
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
 
@@ -22,32 +24,38 @@ class _ProfilePageState extends State<ProfilePage> {
         title: "Edit profile",
         subString: "Name, phone no, address, email ...",
         image: "assets/svg/vuesax/profileTileIcons/Group.svg",
-        onTap: () {}),
+        onTap: (context) {}),
     ProfileListTileData(
         title: "Statements & Reports",
         subString: "Download transaction details, orders, deliveries",
         image: "assets/svg/vuesax/profileTileIcons/Group-1.svg",
-        onTap: () {}),
+        onTap: (context) {}),
     ProfileListTileData(
         title: "Notification Settings",
         subString: "mute, unmute, set location & tracking setting",
         image: "assets/svg/vuesax/profileTileIcons/notification.svg",
-        onTap: () {}),
+        onTap: (context) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const NotificationPage()));
+        }),
     ProfileListTileData(
         title: "Card & Bank account settings",
         subString: "change cards, delete card details",
         image: "assets/svg/vuesax/profileTileIcons/wallet-2.svg",
-        onTap: () {}),
+        onTap: (context) {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const PaymentPage()));
+        }),
     ProfileListTileData(
         title: "Referrals",
         subString: "check no of friends and earn",
         image: "assets/svg/vuesax/profileTileIcons/carbon_two-person-lift.svg",
-        onTap: () {}),
+        onTap: (context) {}),
     ProfileListTileData(
         title: "About Us",
         subString: "know more about us, terms and conditions",
         image: "assets/svg/vuesax/profileTileIcons/map.svg",
-        onTap: () {}),
+        onTap: (context) {}),
   ];
 
   @override
@@ -71,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.onBackground,
         centerTitle: true,
         title: Text(
           "Profile",
@@ -131,13 +139,15 @@ class ProfileListTileLogout extends StatelessWidget {
         },
         child: Container(
           height: 50,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 1,
-                spreadRadius: 1,
-                offset: const Offset(0, 1))
-          ]),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onBackground,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 1,
+                    spreadRadius: 1,
+                    offset: const Offset(0, 1))
+              ]),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Row(
@@ -181,7 +191,7 @@ class ProfileListTileData {
   final String title;
   final String subString;
   final String image;
-  final Function() onTap;
+  final Function(dynamic) onTap;
   ProfileListTileData({
     required this.title,
     required this.subString,
@@ -200,17 +210,19 @@ class ProfileListTile extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 12),
       child: GestureDetector(
         onTap: () {
-          data.onTap.call();
+          data.onTap.call(context);
         },
         child: Container(
           height: 62,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 1,
-                spreadRadius: 1,
-                offset: const Offset(0, 1))
-          ]),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onBackground,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 1,
+                    spreadRadius: 1,
+                    offset: const Offset(0, 1))
+              ]),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Row(
@@ -313,7 +325,7 @@ class ProfileInfoBlock extends StatelessWidget {
             padding: EdgeInsets.all(7.5),
             child: CircleAvatar(
               radius: 30,
-              backgroundImage:
+              foregroundImage:
                   NetworkImage("https://via.placeholder.com/60x60"),
             ),
           ),
@@ -353,8 +365,9 @@ class ProfileInfoBlock extends StatelessWidget {
           ),
           SvgPicture.asset(
             "assets/svg/vuesax/linear/eye-slash.svg",
-            width: 14,
-            height: 14,
+            width: 16,
+            height: 16,
+            color: Theme.of(context).colorScheme.inverseSurface,
           )
         ],
       ),

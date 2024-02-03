@@ -27,7 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
       pageIndex = index;
     });
     pageController.animateToPage(index,
-        duration: const Duration(microseconds: 300), curve: Curves.easeOut);
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOutSine);
   }
 
   @override
@@ -35,11 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: PageView(
-          controller: pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          onPageChanged: (value) {},
-          children: pages
-        ),
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            onPageChanged: (value) {},
+            children: pages),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _goToPage(value);
         },
         enableFeedback: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 5,
         items: List.generate(4, (index) {
           return BottomNavigationBarItem(
@@ -63,7 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 3,
                       width: 35,
                       decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
                           boxShadow: pageIndex == index
                               ? [
                                   BoxShadow(
@@ -82,7 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 24,
                     height: 24,
                     child: pageIndex == index
-                        ? SvgPicture.asset(navbarWidgets[index].image, color: Theme.of(context).colorScheme.primary,)
+                        ? SvgPicture.asset(
+                            navbarWidgets[index].image,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
                         : SvgPicture.asset(
                             navbarWidgets[index].unSelectedImage),
                   )
@@ -95,7 +99,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-final pages = [ const HomePage(),const WalletPage(),const TrackPage(),const ProfilePage() ];
+final pages = [
+  const HomePage(),
+  const WalletPage(),
+  const TrackPage(),
+  const ProfilePage()
+];
 
 List<NavBarIcon> navbarWidgets = [
   const NavBarIcon(

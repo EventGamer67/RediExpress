@@ -70,6 +70,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/
     - assets/svg/
     - assets/svg/vuesax/bold/
     - assets/svg/vuesax/linear/
