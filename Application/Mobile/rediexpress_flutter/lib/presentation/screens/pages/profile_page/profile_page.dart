@@ -5,8 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rediexpress_flutter/Data/profile/profile_list_data.dart';
 import 'package:rediexpress_flutter/presentation/screens/pages/add_payment_method.dart';
 import 'package:rediexpress_flutter/presentation/screens/pages/notification_page.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/profile_page/profile_list_tile.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/profile_page/toggletheme_switch.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/profile_page/profile_info_block.dart';
 
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
 
@@ -19,6 +23,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late bool isDarkTheme;
+  
   List<ProfileListTileData> datatiles = [
     ProfileListTileData(
         title: "Edit profile",
@@ -187,190 +192,3 @@ class ProfileListTileLogout extends StatelessWidget {
   }
 }
 
-class ProfileListTileData {
-  final String title;
-  final String subString;
-  final String image;
-  final Function(dynamic) onTap;
-  ProfileListTileData({
-    required this.title,
-    required this.subString,
-    required this.image,
-    required this.onTap,
-  });
-}
-
-class ProfileListTile extends StatelessWidget {
-  final ProfileListTileData data;
-  const ProfileListTile({super.key, required this.data});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 12),
-      child: GestureDetector(
-        onTap: () {
-          data.onTap.call(context);
-        },
-        child: Container(
-          height: 62,
-          decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onBackground,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 1,
-                    spreadRadius: 1,
-                    offset: const Offset(0, 1))
-              ]),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SvgPicture.asset(
-                  data.image,
-                  color: Theme.of(context).colorScheme.inverseSurface,
-                ),
-                const SizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      data.title,
-                      style: GoogleFonts.roboto(
-                          color: Theme.of(context).colorScheme.inverseSurface,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      data.subString,
-                      style: GoogleFonts.roboto(
-                          color: Color.fromARGB(255, 167, 167, 167),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                )),
-                SvgPicture.asset(
-                  "assets/svg/Vector.svg",
-                  color: Theme.of(context).colorScheme.inverseSurface,
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ToggleSwitchTheme extends StatelessWidget {
-  final Function(bool theme) switchTheme;
-  final bool isDarkTheme;
-  const ToggleSwitchTheme(
-      {super.key, required this.switchTheme, required this.isDarkTheme});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "Enable dark mode",
-            style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.inverseSurface,
-                fontSize: 16),
-          ),
-          SizedBox(
-            width: 60,
-            height: 30,
-            child: FittedBox(
-              alignment: Alignment.centerRight,
-              fit: BoxFit.scaleDown,
-              child: CupertinoSwitch(
-                applyTheme: true,
-                value: isDarkTheme,
-                onChanged: (value) {
-                  switchTheme(value);
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ProfileInfoBlock extends StatelessWidget {
-  const ProfileInfoBlock({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 75,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(7.5),
-            child: CircleAvatar(
-              radius: 30,
-              foregroundImage:
-                  NetworkImage("https://via.placeholder.com/60x60"),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Hello Ken",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.roboto(
-                      color: Theme.of(context).colorScheme.inverseSurface,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: "Current balance: ",
-                      style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: Theme.of(context).colorScheme.inverseSurface,
-                      ),
-                      children: [
-                        TextSpan(
-                            text: "N10,712:00",
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                              color: Theme.of(context).colorScheme.primary,
-                            ))
-                      ]),
-                )
-              ],
-            ),
-          ),
-          SvgPicture.asset(
-            "assets/svg/vuesax/linear/eye-slash.svg",
-            width: 16,
-            height: 16,
-            color: Theme.of(context).colorScheme.inverseSurface,
-          )
-        ],
-      ),
-    );
-  }
-}
