@@ -32,12 +32,12 @@ class _WalletPageState extends State<WalletPage> {
               color: Theme.of(context).colorScheme.background,
               child: Column(
                 children: [
-                  ProfileInfoBlock(),
-                  SizedBox(
+                  const ProfileInfoBlock(),
+                  const SizedBox(
                     height: 12,
                   ),
-                  Wallet_TopUp_block(),
-                  SizedBox(
+                  const Wallet_TopUp_block(),
+                  const SizedBox(
                     height: 41,
                   ),
                   Expanded(
@@ -53,7 +53,7 @@ class _WalletPageState extends State<WalletPage> {
                                   fontWeight: FontWeight.w500, fontSize: 20),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 24,
                           ),
                           Expanded(
@@ -62,7 +62,7 @@ class _WalletPageState extends State<WalletPage> {
                                 itemCount: 20,
                                 itemBuilder: ((context, index) {
                                   return Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
+                                    padding: const EdgeInsets.only(bottom: 12),
                                     child: Container(
                                         height: 45,
                                         decoration: BoxDecoration(
@@ -74,7 +74,55 @@ class _WalletPageState extends State<WalletPage> {
                                                   blurRadius: 1,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1))
-                                            ])),
+                                            ]),
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              12, 0, 12, 0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "-N3,000.00",
+                                                    style: GoogleFonts.roboto(
+                                                        color: true
+                                                            ? const Color
+                                                                .fromARGB(255,
+                                                                53, 179, 105)
+                                                            : const Color
+                                                                .fromARGB(255,
+                                                                237, 58, 58),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16),
+                                                  ),
+                                                  Text(
+                                                    "delivery fee",
+                                                    style: GoogleFonts.roboto(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                "July 7, 2022",
+                                                style: GoogleFonts.roboto(
+                                                    fontSize: 12,
+                                                    color: const Color.fromARGB(
+                                                        255, 167, 167, 167),
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              )
+                                            ],
+                                          ),
+                                        )),
                                   );
                                 })),
                           )

@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rediexpress_flutter/presentation/screens/chat_screen/chat_screen.dart';
+import 'package:rediexpress_flutter/presentation/screens/sendapackage_screen/sendapackage_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: ListView(
@@ -149,7 +150,7 @@ final List<ServiceBlock> servicesList = [
   ServiceBlock(
       onTap: (context) {
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const ChatScreen()));
+            .push(MaterialPageRoute(builder: (context) => const SendAPackageScreen()));
       },
       image: "assets/codicon_package.svg",
       desc: "Request for a driver to pick up or deliver your package for you",
