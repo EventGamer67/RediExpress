@@ -48,270 +48,309 @@ class _SendAPackageScreenState extends State<SendAPackageScreen> {
               const SizedBox(
                 height: 43,
               ),
-              Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset("assets/svg/icons/Vector.svg"),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          "Origin Details",
-                          style: GoogleFonts.roboto(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color:
-                                  Theme.of(context).colorScheme.inverseSurface),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "Address",
-                      controller: null,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "State, Country",
-                      controller: null,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "Phone number",
-                      controller: null,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "Others",
-                      controller: null,
-                    ),
-                  ],
-                ),
-              ),
+              OriginDetailsBlock(),
               const SizedBox(
                 height: 40,
               ),
-              Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset("assets/svg/icons/Vector (1).svg"),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          "Destination Details",
-                          style: GoogleFonts.roboto(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color:
-                                  Theme.of(context).colorScheme.inverseSurface),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "Address",
-                      controller: null,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "State, Country",
-                      controller: null,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "Phone number",
-                      controller: null,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "Others",
-                      controller: null,
-                    ),
-                  ],
-                ),
-              ),
+              DestinationDetailsBlock(),
               const SizedBox(
                 height: 40,
               ),
-              Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Destination Details",
-                          style: GoogleFonts.roboto(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color:
-                                  Theme.of(context).colorScheme.inverseSurface),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "package item",
-                      controller: null,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "Weight of item(kg)",
-                      controller: null,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomtextField(
-                      hinttext: "Worth of items",
-                      controller: null,
-                    ),
-                  ],
-                ),
-              ),
+              PackageDetailsBlock(),
               const SizedBox(
                 height: 39,
               ),
-              Container(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Select delivery type",
-                        style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color:
-                                Theme.of(context).colorScheme.inverseSurface),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 75,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 1,
-                                      spreadRadius: 1,
-                                      offset: const Offset(0, 1.3))
-                                ],
-                                borderRadius: BorderRadius.circular(8),
-                                color: Theme.of(context).colorScheme.primary),
-                            child: Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/svg/icons/clock.svg",
-                                    width: 24,
-                                    height: 24,
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "data",
-                                    style: GoogleFonts.roboto(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 24,
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 75,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 1,
-                                      spreadRadius: 1,
-                                      offset: const Offset(0, 1.3))
-                                ],
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.white),
-                            child: Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/svg/icons/Vector (2).svg",
-                                    width: 24,
-                                    height: 24,
-                                    color: Color.fromARGB(255, 167, 167, 167),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Scheduled delivery",
-                                    style: GoogleFonts.roboto(
-                                        color:
-                                            Color.fromARGB(255, 167, 167, 167),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              )
+              SelectDeliveryTypeBlock()
             ],
           ),
         ),
       )),
+    );
+  }
+}
+
+class SelectDeliveryTypeBlock extends StatelessWidget {
+  const SelectDeliveryTypeBlock({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Select delivery type",
+              style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                  color: Theme.of(context).colorScheme.inverseSurface),
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: 75,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            offset: const Offset(0, 1.3))
+                      ],
+                      borderRadius: BorderRadius.circular(8),
+                      color: Theme.of(context).colorScheme.primary),
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/svg/icons/clock.svg",
+                          width: 24,
+                          height: 24,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "data",
+                          style: GoogleFonts.roboto(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 24,
+              ),
+              Expanded(
+                child: Container(
+                  height: 75,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                            offset: const Offset(0, 1.3))
+                      ],
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/svg/icons/Vector (2).svg",
+                          width: 24,
+                          height: 24,
+                          color: Color.fromARGB(255, 167, 167, 167),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Scheduled delivery",
+                          style: GoogleFonts.roboto(
+                              color: Color.fromARGB(255, 167, 167, 167),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class PackageDetailsBlock extends StatelessWidget {
+  const PackageDetailsBlock({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Text(
+                "Destination Details",
+                style: GoogleFonts.roboto(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.inverseSurface),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "package item",
+            controller: null,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "Weight of item(kg)",
+            controller: null,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "Worth of items",
+            controller: null,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DestinationDetailsBlock extends StatelessWidget {
+  const DestinationDetailsBlock({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              SvgPicture.asset("assets/svg/icons/Vector (1).svg"),
+              const SizedBox(
+                width: 8,
+              ),
+              Text(
+                "Destination Details",
+                style: GoogleFonts.roboto(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.inverseSurface),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "Address",
+            controller: null,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "State, Country",
+            controller: null,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "Phone number",
+            controller: null,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "Others",
+            controller: null,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OriginDetailsBlock extends StatelessWidget {
+  const OriginDetailsBlock({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              SvgPicture.asset("assets/svg/icons/Vector.svg"),
+              const SizedBox(
+                width: 8,
+              ),
+              Text(
+                "Origin Details",
+                style: GoogleFonts.roboto(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.inverseSurface),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "Address",
+            controller: null,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "State, Country",
+            controller: null,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "Phone number",
+            controller: null,
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const CustomtextField(
+            hinttext: "Others",
+            controller: null,
+          ),
+        ],
+      ),
     );
   }
 }
