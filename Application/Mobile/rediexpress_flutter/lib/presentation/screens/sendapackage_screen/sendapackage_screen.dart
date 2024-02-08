@@ -1,6 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rediexpress_flutter/presentation/screens/sendapackage_screen/sendapackage_receip_screen.dart';
+
+class DestintionDetails {
+  String adress = "";
+  String state = "";
+  String phone = "";
+  String others = "";
+
+  DestintionDetails();
+
+  factory DestintionDetails.fromData(adress, others, phone, state) {
+    DestintionDetails dat = DestintionDetails();
+    dat.adress = adress;
+    dat.others = others;
+    dat.phone = phone;
+    dat.state = state;
+    return dat;
+  }
+}
 
 class SendAPackageScreen extends StatefulWidget {
   const SendAPackageScreen({super.key});
@@ -10,6 +30,26 @@ class SendAPackageScreen extends StatefulWidget {
 }
 
 class _SendAPackageScreenState extends State<SendAPackageScreen> {
+  late List<DestintionDetails> details;
+
+  _addnew() {
+    details.add(DestintionDetails());
+    setState(() {});
+  }
+
+  _onInstant(context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return SendAPackageReceipScreen(details: this.details);
+    }));
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    details = [DestintionDetails()];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,15 +92,38 @@ class _SendAPackageScreenState extends State<SendAPackageScreen> {
               const SizedBox(
                 height: 40,
               ),
-              DestinationDetailsBlock(),
+              Column(
+                  children: List.generate(details.length, (index) {
+                return Column(
+                  children: [
+                    index != 0
+                        ? (SizedBox(
+                            height: 11,
+                          ))
+                        : SizedBox(),
+                    DestinationDetailsBlock(),
+                  ],
+                );
+              }).toList()),
               const SizedBox(
-                height: 40,
+                height: 11,
+              ),
+              AddDestionationBlock(
+                addnew: _addnew,
+              ),
+              const SizedBox(
+                height: 13,
               ),
               PackageDetailsBlock(),
               const SizedBox(
                 height: 39,
               ),
-              SelectDeliveryTypeBlock()
+              SelectDeliveryTypeBlock(
+                onInstant: _onInstant,
+              ),
+              SizedBox(
+                height: 9,
+              )
             ],
           ),
         ),
@@ -69,10 +132,41 @@ class _SendAPackageScreenState extends State<SendAPackageScreen> {
   }
 }
 
+class AddDestionationBlock extends StatelessWidget {
+  final Function addnew;
+  const AddDestionationBlock({super.key, required this.addnew});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => addnew.call(),
+      child: Container(
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              "assets/svg/vuesax/linear/add-square.svg",
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            SizedBox(
+              width: 6,
+            ),
+            Text(
+              "Add destination",
+              style: GoogleFonts.roboto(
+                  color: Color.fromARGB(255, 167, 167, 167),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class SelectDeliveryTypeBlock extends StatelessWidget {
-  const SelectDeliveryTypeBlock({
-    super.key,
-  });
+  final Function(dynamic) onInstant;
+  const SelectDeliveryTypeBlock({super.key, required this.onInstant});
 
   @override
   Widget build(BuildContext context) {
@@ -96,41 +190,46 @@ class SelectDeliveryTypeBlock extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Container(
-                  height: 75,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 1,
-                            spreadRadius: 1,
-                            offset: const Offset(0, 1.3))
-                      ],
-                      borderRadius: BorderRadius.circular(8),
-                      color: Theme.of(context).colorScheme.primary),
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          "assets/svg/icons/clock.svg",
-                          width: 24,
-                          height: 24,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "data",
-                          style: GoogleFonts.roboto(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14),
-                        ),
-                      ],
+                child: GestureDetector(
+                  onTap: () {
+                    onInstant.call(context);
+                  },
+                  child: Container(
+                    height: 75,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 1,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 1.3))
+                        ],
+                        borderRadius: BorderRadius.circular(8),
+                        color: Theme.of(context).colorScheme.primary),
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            "assets/svg/icons/clock.svg",
+                            width: 24,
+                            height: 24,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Instant delivery",
+                            style: GoogleFonts.roboto(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
