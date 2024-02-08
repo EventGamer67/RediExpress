@@ -33,7 +33,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     "assets/svg/arrow-square-right.svg",
                   )),
             ),
-          ),
+          ), 
           title: Text(
             "Chats",
             style: GoogleFonts.roboto(
@@ -62,7 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
                       child: ChatBlock(
                         image: "",
-                        name: "",
+                        name: "", 
                         message: "",
                         unreadedCount: 1,
                       ),

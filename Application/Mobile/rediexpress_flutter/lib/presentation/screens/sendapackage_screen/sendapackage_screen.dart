@@ -1,8 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rediexpress_flutter/presentation/screens/sendapackage_screen/sendapackage_receip_screen.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class DestintionDetails {
   String adress = "";
@@ -38,8 +42,11 @@ class _SendAPackageScreenState extends State<SendAPackageScreen> {
   }
 
   _onInstant(context) {
+    final String code =
+        "R-${Random.secure().nextInt(8999) + 1000}-${Random.secure().nextInt(8999) + 1000}-${Random.secure().nextInt(8999) + 1000}-${Random.secure().nextInt(8999) + 1000}";
+    GetIt.I.get<Talker>().good("generated ${code}");
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return SendAPackageReceipScreen(details: this.details);
+      return SendAPackageReceipScreen(details: this.details, code: code);
     }));
   }
 
@@ -101,7 +108,9 @@ class _SendAPackageScreenState extends State<SendAPackageScreen> {
                             height: 11,
                           ))
                         : SizedBox(),
-                    DestinationDetailsBlock(),
+                    DestinationDetailsBlock(
+                      detail: details[index],
+                    ),
                   ],
                 );
               }).toList()),
@@ -335,9 +344,8 @@ class PackageDetailsBlock extends StatelessWidget {
 }
 
 class DestinationDetailsBlock extends StatelessWidget {
-  const DestinationDetailsBlock({
-    super.key,
-  });
+  DestintionDetails detail;
+  DestinationDetailsBlock({super.key, required this.detail});
 
   @override
   Widget build(BuildContext context) {
@@ -363,30 +371,42 @@ class DestinationDetailsBlock extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          const CustomtextField(
+          CustomtextField(
             hinttext: "Address",
             controller: null,
+            onChanged: (value) {
+              this.detail.adress = value;
+            },
           ),
           const SizedBox(
             height: 5,
           ),
-          const CustomtextField(
+          CustomtextField(
             hinttext: "State, Country",
             controller: null,
+            onChanged: (value) {
+              this.detail.state = value;
+            },
           ),
           const SizedBox(
             height: 5,
           ),
-          const CustomtextField(
+          CustomtextField(
             hinttext: "Phone number",
             controller: null,
+            onChanged: (value) {
+              this.detail.phone = value;
+            },
           ),
           const SizedBox(
             height: 5,
           ),
-          const CustomtextField(
+          CustomtextField(
             hinttext: "Others",
             controller: null,
+            onChanged: (value) {
+              this.detail.others = value;
+            },
           ),
         ],
       ),
@@ -423,21 +443,24 @@ class OriginDetailsBlock extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          const CustomtextField(
+          CustomtextField(
             hinttext: "Address",
             controller: null,
+            onChanged: (value) {
+              print(value);
+            },
           ),
           const SizedBox(
             height: 5,
           ),
-          const CustomtextField(
+          CustomtextField(
             hinttext: "State, Country",
             controller: null,
           ),
           const SizedBox(
             height: 5,
           ),
-          const CustomtextField(
+          CustomtextField(
             hinttext: "Phone number",
             controller: null,
           ),
@@ -456,11 +479,14 @@ class OriginDetailsBlock extends StatelessWidget {
 
 class CustomtextField extends StatelessWidget {
   final String hinttext;
+  final Function(String value)? onChanged;
   final TextEditingController? controller;
 
   const CustomtextField(
-      {super.key, required this.hinttext, required this.controller});
-
+      {super.key,
+      required this.hinttext,
+      required this.controller,
+      this.onChanged});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -480,6 +506,9 @@ class CustomtextField extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(8, 7, 0, 9),
         child: TextField(
           controller: controller,
+          onChanged: (value) {
+            onChanged?.call(value);
+          },
           decoration: InputDecoration.collapsed(
               hintText: hinttext,
               hintStyle: GoogleFonts.roboto(

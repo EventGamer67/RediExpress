@@ -1,12 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rediexpress_flutter/presentation/screens/pages/transaction_page/transaction_page.dart';
 import 'package:rediexpress_flutter/presentation/screens/sendapackage_screen/sendapackage_screen.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class SendAPackageReceipScreen extends StatefulWidget {
   final List<DestintionDetails> details;
-  const SendAPackageReceipScreen({super.key, required this.details});
+  final String code;
+  const SendAPackageReceipScreen({super.key, required this.details, required this.code});
 
   @override
   State<SendAPackageReceipScreen> createState() =>
@@ -17,6 +21,10 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  _goToTransaction(){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TransactionPage(code: widget.code)));
   }
 
   @override
@@ -112,6 +120,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
               children: List.generate(this.widget.details.length, (index) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "1. ${widget.details[index].adress}",
@@ -137,13 +146,257 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
             SizedBox(
               height: 8,
             ),
-            Text(
-              "Other details",
-              style: GoogleFonts.roboto(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: Theme.of(context).colorScheme.inverseSurface),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Other details",
+                    style: GoogleFonts.roboto(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).colorScheme.inverseSurface),
+                  ),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Package Items",
+                      style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: Color.fromARGB(255, 167, 167, 167)),
+                    ),
+                    Text("data",
+                        style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 236, 130, 0))),
+                  ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Weight of items",
+                      style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: Color.fromARGB(255, 167, 167, 167)),
+                    ),
+                    Text("data",
+                        style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 236, 130, 0))),
+                  ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Worth of Items",
+                      style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: Color.fromARGB(255, 167, 167, 167)),
+                    ),
+                    Text("data",
+                        style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 236, 130, 0))),
+                  ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Tracking Number",
+                      style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: Color.fromARGB(255, 167, 167, 167)),
+                    ),
+                    Text("data",
+                        style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 236, 130, 0))),
+                  ],
+                )
+              ],
             ),
+            SizedBox(
+              height: 36.5,
+            ),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: Color.fromARGB(255, 167, 167, 167),
+            ),
+            SizedBox(
+              height: 8.5,
+            ),
+            Text(
+              "Charges",
+              style: GoogleFonts.roboto(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).colorScheme.primary),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Delivery Charges",
+                  style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Color.fromARGB(255, 167, 167, 167)),
+                ),
+                Text("data",
+                    style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 236, 130, 0))),
+              ],
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Instant delivery",
+                  style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Color.fromARGB(255, 167, 167, 167)),
+                ),
+                Text("data",
+                    style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 236, 130, 0))),
+              ],
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Tax and Service Charges",
+                  style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Color.fromARGB(255, 167, 167, 167)),
+                ),
+                Text("data",
+                    style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 236, 130, 0))),
+              ],
+            ),
+            SizedBox(
+              height: 8.5,
+            ),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: Color.fromARGB(255, 167, 167, 167),
+            ),
+            SizedBox(
+              height: 4.5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Package total",
+                  style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      color: Color.fromARGB(255, 167, 167, 167)),
+                ),
+                Text("data",
+                    style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 236, 130, 0))),
+              ],
+            ),
+            SizedBox(
+              height: 46,
+            ),
+            Container(
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Container(
+                    height: 48,
+                    child: Center(
+                      child: Text(
+                        "Edit package",
+                        style: GoogleFonts.roboto(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.primary)),
+                  )),
+                  SizedBox(
+                    width: 24,
+                  ),
+                  Expanded(
+                      child: GestureDetector(
+                        onTap: () => _goToTransaction(),
+                        child: Container(
+                                          height: 48,
+                                          child: Center(
+                        child: Text(
+                          "Make payment",
+                          style: GoogleFonts.roboto(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                                          ),
+                                          decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(8),
+                                          ),
+                                        ),
+                      )),
+                ],
+              ),
+            )
           ]),
         ),
       )),

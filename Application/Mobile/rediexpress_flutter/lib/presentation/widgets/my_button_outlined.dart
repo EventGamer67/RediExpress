@@ -6,11 +6,13 @@ class MyButtonOutlined extends StatelessWidget {
   final String text;
   final double width;
   final double height;
-  const MyButtonOutlined(
+  FontWeight? weight = FontWeight.bold;
+  MyButtonOutlined(
       {super.key,
       required this.onClick,
       required this.width,
       required this.height,
+      this.weight,
       required this.text});
 
   @override
@@ -35,7 +37,7 @@ class MyButtonOutlined extends StatelessWidget {
           child: Center(
               child: Text(text,
                   style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: weight,
                       color: const Color.fromARGB(255, 5, 95, 250)))),
         ),
       ),

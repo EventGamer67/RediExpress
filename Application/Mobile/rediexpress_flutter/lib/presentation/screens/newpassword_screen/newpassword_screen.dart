@@ -95,7 +95,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               MyButtonFilled(
                   enabled: true,
                   onClick: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen() ));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen(startpage: 0,) ));
 
                   },
                   width: double.infinity,

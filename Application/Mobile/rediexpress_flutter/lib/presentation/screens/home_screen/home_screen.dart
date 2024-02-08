@@ -6,23 +6,25 @@ import 'package:rediexpress_flutter/presentation/screens/pages/track_page.dart';
 import 'package:rediexpress_flutter/presentation/screens/pages/wallet_page.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final int startpage;
+  const HomeScreen({super.key, required this.startpage});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   late final PageController pageController;
   int pageIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController();
+    pageController = PageController(initialPage: widget.startpage);
+    pageIndex = widget.startpage;
   }
 
-  _goToPage(int index) {
+  goToPage(int index) {
     setState(() {
       pageIndex = index;
     });
@@ -45,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: pageIndex,
         type: BottomNavigationBarType.fixed,
         onTap: (value) {
-          _goToPage(value);
+          goToPage(value);
         },
         enableFeedback: false,
         backgroundColor: Theme.of(context).colorScheme.background,

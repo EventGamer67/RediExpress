@@ -46,6 +46,8 @@ dependencies:
   dcdg: ^4.1.0
   supabase_flutter: ^2.3.1
   pinput: ^3.0.1
+  flutter_map: ^6.1.0
+  easy_stepper: ^0.8.3
 
 dev_dependencies:
   flutter_test:
