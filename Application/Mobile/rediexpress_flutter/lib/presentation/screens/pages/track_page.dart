@@ -4,6 +4,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:rediexpress_flutter/presentation/screens/sendapackage_screen/sendapackage_receip_screen.dart';
+import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 
 class TrackPage extends StatefulWidget {
   const TrackPage({super.key});
@@ -24,71 +26,20 @@ class _TrackPageState extends State<TrackPage> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            height: 320,
-            child: FlutterMap(
-              options: MapOptions(
-                initialCenter: LatLng(51.509364, -0.128928),
-                initialZoom: 0.2,
-              ),
-              children: [
-                TileLayer(
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  userAgentPackageName: 'com.example.app',
-                ),
-                PolylineLayer(polylines: [
-                  Polyline(
-                      strokeWidth: 10,
-                      strokeCap: StrokeCap.round,
-                      strokeJoin: StrokeJoin.round,
-                      color: Theme.of(context).colorScheme.primary,
-                      points: [
-                        LatLng(51.509364, -0.128928),
-                        LatLng(53.509364, -1.128928),
-                        LatLng(53.509364, 1.18928),
-                        LatLng(52.509364, 1.38928),
-                        LatLng(54.509364, -0.128928)
-                      ])
-                ]),
-                MarkerLayer(markers: [
-                  Marker(
-                      point: LatLng(51.509364, -0.128928),
-                      child: Icon(
-                        Icons.map,
-                        color: Colors.red,
-                      )),
-                  Marker(
-                      point: LatLng(54.509364, -0.128928),
-                      child: Icon(Icons.map, color: Colors.red))
-                ])
-                // PolygonLayer(polygons: [
-                //   Polygon(
-                //       color: Colors.red.withOpacity(0.2),
-                //       borderStrokeWidth: 2,
-                //       isFilled: true,
-                //       borderColor: Colors.red,
-                //       points: [
-                //         LatLng(51.509364, -0.128928),
-                //         LatLng(53.509364, -1.128928),
-                //         LatLng(54.509364, -0.128928)
-                //       ])
-                // ]),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 36,
-          ),
+          const CustomMap(),
           SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(
+                      height: 36,
+                    ),
                     Text(
                       "Tracking number",
                       style: GoogleFonts.roboto(
@@ -96,14 +47,14 @@ class _TrackPageState extends State<TrackPage> {
                           fontWeight: FontWeight.w500,
                           fontSize: 16),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 24,
                     ),
                     Row(
                       children: [
                         SvgPicture.asset(
                             "assets/svg/icons/vuesax_linear_sun.svg"),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         Text(
@@ -115,57 +66,170 @@ class _TrackPageState extends State<TrackPage> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Text(
                       "Package Status",
                       style: GoogleFonts.roboto(
-                          color: Color.fromARGB(255, 167, 167, 167),
+                          color: const Color.fromARGB(255, 167, 167, 167),
                           fontWeight: FontWeight.w400,
                           fontSize: 14),
                     ),
-                    Container(
-                      child: Stepper(
-                        margin: EdgeInsets.only(left: 0),
-                        onStepTapped: (value) {},
-                        currentStep: 0,
-                        physics: NeverScrollableScrollPhysics(),
-                        controlsBuilder: (context, details) {
-                          return SizedBox(
-                            width: double.infinity,
-                            height: 0,
-                          );
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const CustomStepper(),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    MyButtonFilled(
+                        enabled: true,
+                        onClick: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const SendAPackageReceipScreen(
+                              code: "",
+                              details: [],
+                            );
+                          }));
                         },
-                        
-                        steps: [
-                          Step(
-                              title: Text("Courier requested"),
-                              content: SizedBox(
-                                height: 0,
-                                width: 1,
-                              ),
-                              isActive: true),
-                          Step(
-                              title: Text("test"),
-                              content: SizedBox(
-                                height: 1,
-                                width: 1,
-                              ),
-                              isActive: true),
-                          Step(
-                              title: Text("test"),
-                              content: Text("test"),
-                              isActive: true)
-                        ],
-                      ),
-                    )
+                        width: double.infinity,
+                        height: 46,
+                        fontSize: 16,
+                        text: "View Package Info")
                   ],
                 ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomMap extends StatelessWidget {
+  const CustomMap({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 320,
+      child: FlutterMap(
+        options: const MapOptions(
+          initialCenter: LatLng(51.509364, -0.128928),
+          initialZoom: 0.2,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.app',
+          ),
+          PolylineLayer(polylines: [
+            Polyline(
+                strokeWidth: 10,
+                strokeCap: StrokeCap.round,
+                strokeJoin: StrokeJoin.round,
+                color: Theme.of(context).colorScheme.primary,
+                points: [
+                  const LatLng(51.509364, -0.128928),
+                  const LatLng(53.509364, -1.128928),
+                  const LatLng(53.509364, 1.18928),
+                  const LatLng(52.509364, 1.38928),
+                  const LatLng(54.509364, -0.128928)
+                ])
+          ]),
+          const MarkerLayer(markers: [
+            Marker(
+                point: LatLng(51.509364, -0.128928),
+                child: Icon(
+                  Icons.map,
+                  color: Colors.red,
+                )),
+            Marker(
+                point: LatLng(54.509364, -0.128928),
+                child: Icon(Icons.map, color: Colors.red))
+          ])
+        ],
+      ),
+    );
+  }
+}
+
+class CustomStepper extends StatelessWidget {
+  const CustomStepper({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: List.generate(
+            4,
+            (index) => Container(
+                  height: 48,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 14,
+                        child: Column(
+                          children: [
+                            SvgPicture.asset("assets/svg/Checkbox.svg"),
+                            Container(
+                              width: 1,
+                              height: 34,
+                              color: index != 3
+                                  ? const Color(0xFFA7A7A7)
+                                  : Colors.transparent,
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Courier requested",
+                            style: GoogleFonts.roboto(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Theme.of(context).colorScheme.primary),
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Text(
+                                "July 7 2022",
+                                style: GoogleFonts.roboto(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    color: const Color(0xFFEC8000)),
+                              ),
+                              const SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                "10:30am",
+                                style: GoogleFonts.roboto(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    color: const Color(0xFFEC8000)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )),
       ),
     );
   }
