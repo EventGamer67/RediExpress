@@ -48,6 +48,7 @@ dependencies:
   pinput: ^3.0.1
   flutter_map: ^6.1.0
   easy_stepper: ^0.8.3
+  sensors_plus: ^4.0.2
 
 dev_dependencies:
   flutter_test:

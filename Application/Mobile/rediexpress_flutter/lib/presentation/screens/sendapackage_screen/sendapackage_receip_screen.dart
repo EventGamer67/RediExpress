@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rediexpress_flutter/presentation/screens/delivery_succesfull_screen/delivery_succesfull_screen.dart';
 import 'package:rediexpress_flutter/presentation/screens/pages/transaction_page/transaction_page.dart';
 import 'package:rediexpress_flutter/presentation/screens/sendapackage_screen/sendapackage_screen.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -10,7 +11,8 @@ import 'package:talker_flutter/talker_flutter.dart';
 class SendAPackageReceipScreen extends StatefulWidget {
   final List<DestintionDetails> details;
   final String code;
-  const SendAPackageReceipScreen({super.key, required this.details, required this.code});
+  const SendAPackageReceipScreen(
+      {super.key, required this.details, required this.code});
 
   @override
   State<SendAPackageReceipScreen> createState() =>
@@ -23,8 +25,14 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
     super.initState();
   }
 
-  _goToTransaction(){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TransactionPage(code: widget.code)));
+  _goToTransaction() {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => TransactionPage(code: widget.code)));
+  }
+
+  _goToDeliverySeccussfull() {
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => DeliverySuccesfullScreen(code: widget.code)));
   }
 
   @override
@@ -376,24 +384,76 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   ),
                   Expanded(
                       child: GestureDetector(
-                        onTap: () => _goToTransaction(),
-                        child: Container(
-                                          height: 48,
-                                          child: Center(
+                    onTap: () => _goToTransaction(),
+                    child: Container(
+                      height: 48,
+                      child: Center(
                         child: Text(
                           "Make payment",
                           style: GoogleFonts.roboto(
-                              color: Theme.of(context).colorScheme.inversePrimary,
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
                               fontSize: 16,
                               fontWeight: FontWeight.w600),
                         ),
-                                          ),
-                                          decoration: BoxDecoration(
+                      ),
+                      decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(8),
-                                          ),
-                                        ),
-                      )),
+                      ),
+                    ),
+                  )),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 46,
+            ),
+            Container(
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Container(
+                    height: 48,
+                    child: Center(
+                      child: Text(
+                        "Edit package",
+                        style: GoogleFonts.roboto(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                            width: 1,
+                            color: Theme.of(context).colorScheme.primary)),
+                  )),
+                  SizedBox(
+                    width: 24,
+                  ),
+                  Expanded(
+                      child: GestureDetector(
+                    onTap: () => _goToDeliverySeccussfull(),
+                    child: Container(
+                      height: 48,
+                      child: Center(
+                        child: Text(
+                          "Make payment",
+                          style: GoogleFonts.roboto(
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  )),
                 ],
               ),
             )
