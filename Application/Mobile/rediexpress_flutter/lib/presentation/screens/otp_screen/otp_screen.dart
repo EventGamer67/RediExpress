@@ -11,7 +11,8 @@ import 'package:talker_flutter/talker_flutter.dart';
 import '../newpassword_screen/newpassword_screen.dart';
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({super.key});
+  final String email;
+  const OTPScreen({super.key, required this.email});
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -21,10 +22,11 @@ class _OTPScreenState extends State<OTPScreen> {
   late final TextEditingController mail;
   late Timer timer;
   late final TextEditingController controller;
+  bool errored = false;
   String remainTime = '';
 
   @override
-  void dispose(){
+  void dispose() {
     timer.cancel();
     super.dispose();
   }
@@ -45,8 +47,8 @@ class _OTPScreenState extends State<OTPScreen> {
     try {
       if (!timer.isActive) {
         final client = GetIt.I.get<Supabase>().client;
-        await client.auth.signInWithOtp(
-            email: 'islamoffdanil67@gmail.com', shouldCreateUser: false);
+        await client.auth
+            .signInWithOtp(email: widget.email, shouldCreateUser: false);
         timer = Timer.periodic(
             const Duration(seconds: 1), (timer) => _timerTick(timer));
       }
@@ -63,17 +65,20 @@ class _OTPScreenState extends State<OTPScreen> {
           .get<Supabase>()
           .client
           .auth
-          .verifyOTP(
-              email: 'islamoffdanil67@gmail.com',
-              token: text,
-              type: OtpType.email);
-      GetIt.I.get<Talker>().good(response.session!.tokenType.toString());
-      GetIt.I.get<Supabase>().client.auth.updateUser(UserAttributes());
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const NewPasswordScreen()));
-      
+          .verifyOTP(email: widget.email, token: text, type: OtpType.email);
+      if (response.session != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => NewPasswordScreen(email: widget.email,)));
+      } else {
+        setState(() {
+          controller.clear();
+          errored = true;
+        });
+      }
     } catch (error) {
       GetIt.I.get<Talker>().critical(error);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(error.toString())));
     }
   }
 
@@ -83,6 +88,7 @@ class _OTPScreenState extends State<OTPScreen> {
     super.initState();
     controller = TextEditingController();
     timer = Timer(Duration.zero, () {});
+    _sendOTP();
   }
 
   @override
@@ -131,7 +137,9 @@ class _OTPScreenState extends State<OTPScreen> {
                     decoration: BoxDecoration(
                         border: Border.all(
                             width: 1,
-                            color: const Color.fromARGB(255, 167, 167, 167))),
+                            color: errored
+                                ? Color.fromARGB(255, 237, 58, 58)
+                                : Color.fromARGB(255, 167, 167, 167))),
                     width: 32,
                     height: 32),
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetIt.I.get<Talker>().debug(GetIt.I.get<Supabase>().client.auth.currentSession);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeProvider>(

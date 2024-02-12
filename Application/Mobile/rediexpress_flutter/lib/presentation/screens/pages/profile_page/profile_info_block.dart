@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class ProfileInfoBlock extends StatefulWidget {
   const ProfileInfoBlock({
@@ -21,12 +27,26 @@ class _ProfileInfoBlockState extends State<ProfileInfoBlock> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(7.5),
-            child: CircleAvatar(
-              radius: 30,
-              foregroundImage:
-                  NetworkImage("https://via.placeholder.com/60x60"),
+            child: GestureDetector(
+              onTap: () async {
+                var picker = ImagePicker();
+                try {
+                XFile? file =
+                    await picker.pickImage(source: ImageSource.camera);
+                GetIt.I.get<Talker>().good(file);
+                String res = await file!.readAsString(encoding: utf8);
+                GetIt.I.get<Talker>().good(res);
+                } catch(e) {
+                  GetIt.I.get<Talker>().error(e);
+                }
+              },
+              child: CircleAvatar(
+                radius: 30,
+                foregroundImage:
+                    NetworkImage("https://via.placeholder.com/60x60"),
+              ),
             ),
           ),
           Expanded(

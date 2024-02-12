@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
+import 'package:rediexpress_flutter/presentation/screens/home_screen/home_screen.dart';
 import 'package:rediexpress_flutter/presentation/screens/onboarding_screen/onboarding_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,7 +14,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
   @override
   void initState() {
     super.initState();
@@ -19,8 +22,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void goNext(context) async {
     await Future.delayed(const Duration(seconds: 2));
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => const OnboardingScreen()));
+    if (GetIt.I.get<Supabase>().client.auth.currentSession == null) {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const OnboardingScreen()));
+    } else {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen(startpage: 0)));
+    }
   }
 
   @override

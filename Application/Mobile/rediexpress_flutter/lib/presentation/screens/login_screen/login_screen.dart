@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -36,8 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
   _sign() async {
     try {
       final supa = GetIt.I.get<Supabase>();
-      AuthResponse res = await supa.client.auth.signUp(
-          password: _passwordController.text, email: _emailController.text);
+      AuthResponse res = await supa.client.auth.signInWithPassword(
+          password:
+              sha256.convert(utf8.encode(_passwordController.text)).toString(),
+          email: _emailController.text);
       GetIt.I.get<Talker>().good(res.session);
       if (res.session != null) {
         Navigator.of(context).pushReplacement(

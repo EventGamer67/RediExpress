@@ -57,54 +57,52 @@ class _MyTextFieldState extends State<MyTextField> {
         ),
         SizedBox(
           height: 40,
-          child: Expanded(
-            child: TextFormField(
-                obscureText: hided,
-                controller: widget.controller,
-                inputFormatters: widget.formatters,
-                textAlignVertical: TextAlignVertical.bottom,
-                style: GoogleFonts.roboto(color: correct ? Theme.of(context).colorScheme.inverseSurface :Theme.of(context).colorScheme.error ),
-                keyboardType: widget.keyboardtype,
-                validator: widget.validator,
-                decoration: InputDecoration(
-                    suffixIcon: widget.hidable
-                        ? GestureDetector(
-                            onTap: () {
-                              _toggleHide();
-                            },
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              alignment: Alignment.center,
-                              child: SvgPicture.asset(
-                                  hided
-                                      ? 'assets/svg/vuesax/linear/eye-slash.svg'
-                                      : 'assets/svg/vuesax/linear/eye.svg',
-                                  alignment: Alignment.center,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .inverseSurface),
-                            ))
-                        : null,
-                    errorStyle: const TextStyle(fontSize: 0),
-                    errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1,
-                            color: Theme.of(context).colorScheme.error)),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1,
-                            color: Color.fromARGB(255, 167, 167, 167))),
-                    hintText: widget.hint,
-                    hintStyle: GoogleFonts.roboto(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: const Color.fromARGB(255, 207, 207, 207)),
-                    border: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1,
-                            color: Color.fromARGB(255, 167, 167, 167))))),
-          ),
+          child: TextFormField(
+              obscureText: hided,
+              controller: widget.controller,
+              inputFormatters: widget.formatters,
+              textAlignVertical: TextAlignVertical.bottom,
+              style: GoogleFonts.roboto(color: correct ? Theme.of(context).colorScheme.inverseSurface :Theme.of(context).colorScheme.error ),
+              keyboardType: widget.keyboardtype,
+              validator: widget.validator,
+              decoration: InputDecoration(
+                  suffixIcon: widget.hidable
+                      ? GestureDetector(
+                          onTap: () {
+                            _toggleHide();
+                          },
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                                hided
+                                    ? 'assets/svg/vuesax/linear/eye-slash.svg'
+                                    : 'assets/svg/vuesax/linear/eye.svg',
+                                alignment: Alignment.center,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inverseSurface),
+                          ))
+                      : null,
+                  errorStyle: const TextStyle(fontSize: 0),
+                  errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.error)),
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 167, 167, 167))),
+                  hintText: widget.hint,
+                  hintStyle: GoogleFonts.roboto(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: const Color.fromARGB(255, 207, 207, 207)),
+                  border: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 167, 167, 167))))),
         ),
       ],
     );

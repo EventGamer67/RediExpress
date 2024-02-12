@@ -70,7 +70,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Text(
@@ -80,7 +80,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   fontWeight: FontWeight.w500,
                   color: Theme.of(context).colorScheme.primary),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(
@@ -90,7 +90,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   fontWeight: FontWeight.w400,
                   color: Theme.of(context).colorScheme.inverseSurface),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Text(
@@ -98,9 +98,9 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
               style: GoogleFonts.roboto(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 167, 167, 167)),
+                  color: const Color.fromARGB(255, 167, 167, 167)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Text(
@@ -108,9 +108,9 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
               style: GoogleFonts.roboto(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 167, 167, 167)),
+                  color: const Color.fromARGB(255, 167, 167, 167)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(
@@ -120,7 +120,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   fontWeight: FontWeight.w400,
                   color: Theme.of(context).colorScheme.inverseSurface),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Column(
@@ -135,9 +135,9 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                       style: GoogleFonts.roboto(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          color: Color.fromARGB(255, 167, 167, 167)),
+                          color: const Color.fromARGB(255, 167, 167, 167)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 4,
                     ),
                     Text(
@@ -145,13 +145,13 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                       style: GoogleFonts.roboto(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          color: Color.fromARGB(255, 167, 167, 167)),
+                          color: const Color.fromARGB(255, 167, 167, 167)),
                     ),
                   ],
                 );
               }).toList(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Column(
@@ -167,7 +167,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                         color: Theme.of(context).colorScheme.inverseSurface),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 4,
                 ),
                 Row(
@@ -178,16 +178,16 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                       style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
-                          color: Color.fromARGB(255, 167, 167, 167)),
+                          color: const Color.fromARGB(255, 167, 167, 167)),
                     ),
                     Text("data",
                         style: GoogleFonts.roboto(
                             fontWeight: FontWeight.w400,
                             fontSize: 12,
-                            color: Color.fromARGB(255, 236, 130, 0))),
+                            color: const Color.fromARGB(255, 236, 130, 0))),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
@@ -198,16 +198,16 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                       style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
-                          color: Color.fromARGB(255, 167, 167, 167)),
+                          color: const Color.fromARGB(255, 167, 167, 167)),
                     ),
                     Text("data",
                         style: GoogleFonts.roboto(
                             fontWeight: FontWeight.w400,
                             fontSize: 12,
-                            color: Color.fromARGB(255, 236, 130, 0))),
+                            color: const Color.fromARGB(255, 236, 130, 0))),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
@@ -218,16 +218,16 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                       style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
-                          color: Color.fromARGB(255, 167, 167, 167)),
+                          color: const Color.fromARGB(255, 167, 167, 167)),
                     ),
                     Text("data",
                         style: GoogleFonts.roboto(
                             fontWeight: FontWeight.w400,
                             fontSize: 12,
-                            color: Color.fromARGB(255, 236, 130, 0))),
+                            color: const Color.fromARGB(255, 236, 130, 0))),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
@@ -238,26 +238,26 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                       style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
-                          color: Color.fromARGB(255, 167, 167, 167)),
+                          color: const Color.fromARGB(255, 167, 167, 167)),
                     ),
                     Text("data",
                         style: GoogleFonts.roboto(
                             fontWeight: FontWeight.w400,
                             fontSize: 12,
-                            color: Color.fromARGB(255, 236, 130, 0))),
+                            color: const Color.fromARGB(255, 236, 130, 0))),
                   ],
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 36.5,
             ),
             Container(
               width: double.infinity,
               height: 1,
-              color: Color.fromARGB(255, 167, 167, 167),
+              color: const Color.fromARGB(255, 167, 167, 167),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.5,
             ),
             Text(
@@ -267,7 +267,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   fontWeight: FontWeight.w500,
                   color: Theme.of(context).colorScheme.primary),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -278,16 +278,16 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Color.fromARGB(255, 167, 167, 167)),
+                      color: const Color.fromARGB(255, 167, 167, 167)),
                 ),
                 Text("data",
                     style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Color.fromARGB(255, 236, 130, 0))),
+                        color: const Color.fromARGB(255, 236, 130, 0))),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Row(
@@ -298,16 +298,16 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Color.fromARGB(255, 167, 167, 167)),
+                      color: const Color.fromARGB(255, 167, 167, 167)),
                 ),
                 Text("data",
                     style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Color.fromARGB(255, 236, 130, 0))),
+                        color: const Color.fromARGB(255, 236, 130, 0))),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Row(
@@ -318,24 +318,24 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Color.fromARGB(255, 167, 167, 167)),
+                      color: const Color.fromARGB(255, 167, 167, 167)),
                 ),
                 Text("data",
                     style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Color.fromARGB(255, 236, 130, 0))),
+                        color: const Color.fromARGB(255, 236, 130, 0))),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8.5,
             ),
             Container(
               width: double.infinity,
               height: 1,
-              color: Color.fromARGB(255, 167, 167, 167),
+              color: const Color.fromARGB(255, 167, 167, 167),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4.5,
             ),
             Row(
@@ -346,16 +346,16 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                   style: GoogleFonts.roboto(
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: Color.fromARGB(255, 167, 167, 167)),
+                      color: const Color.fromARGB(255, 167, 167, 167)),
                 ),
                 Text("data",
                     style: GoogleFonts.roboto(
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        color: Color.fromARGB(255, 236, 130, 0))),
+                        color: const Color.fromARGB(255, 236, 130, 0))),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 46,
             ),
             Container(
@@ -379,7 +379,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                             width: 1,
                             color: Theme.of(context).colorScheme.primary)),
                   )),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   Expanded(
@@ -406,7 +406,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 46,
             ),
             Container(
@@ -430,7 +430,7 @@ class _SendAPackageReceipScreenState extends State<SendAPackageReceipScreen> {
                             width: 1,
                             color: Theme.of(context).colorScheme.primary)),
                   )),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   Expanded(

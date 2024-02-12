@@ -1,13 +1,20 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/presentation/screens/login_screen/login_screen.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_textfield.dart';
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -18,12 +25,65 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   late final TextEditingController _fioController;
+  late final TextEditingController _phoneController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
+  late final TextEditingController _confirmPasswordController;
+
   bool termCB = false;
+  bool correct = false;
 
   @override
   void initState() {
     _fioController = TextEditingController();
+    _phoneController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
     super.initState();
+  }
+
+  _checkCorrect() {
+    bool res = false;
+    String fio = _fioController.text;
+    String phone = _phoneController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    String confpassword = _confirmPasswordController.text;
+
+    if (termCB) {
+      res = true;
+    }
+    if (fio.isEmpty ||
+        phone.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        confpassword.isEmpty) {
+      res = false;
+    }
+    if (!EmailValidator.validate(email)) {
+      res = false;
+    }
+
+    if (password != confpassword) {
+      res = false;
+    }
+
+    setState(() {
+      correct = res;
+    });
+  }
+
+  _signUp() async {
+    AuthResponse response = await GetIt.I.get<Supabase>().client.auth.signUp(
+        password:
+            sha256.convert(utf8.encode(_passwordController.text)).toString(),
+        email: _emailController.text,
+        data: {
+          "fullname": _fioController.text,
+          "phone": _phoneController.text
+        });
+    GetIt.I.get<Talker>().good(response.user);
   }
 
   @override
@@ -33,32 +93,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Form(
+          onChanged: () {
+            _checkCorrect();
+          },
           autovalidateMode: AutovalidateMode.always,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Create an account",
-                      style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 24,
-                          color: Theme.of(context).colorScheme.inverseSurface),
-                    ),
-                    Text("Complete the sign up process to get started",
-                        style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                          color: const Color.fromARGB(255, 167, 167, 167),
-                        ))
-                  ],
-                ),
+              Text(
+                "Create an account",
+                style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                    color: Theme.of(context).colorScheme.inverseSurface),
               ),
-              const SizedBox(
+              Text("Complete the sign up process to get started",
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                    color: const Color.fromARGB(255, 167, 167, 167),
+                  )),
+              SizedBox(
                 height: 20,
               ),
               MyTextField(
@@ -82,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 formatters: [FilteringTextInputFormatter.digitsOnly, phoneMask],
                 keyboardtype: TextInputType.phone,
                 hint: "+7(999)999-99-99",
-                controller: _fioController,
+                controller: _phoneController,
               ),
               const SizedBox(
                 height: 20,
@@ -90,22 +145,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               MyTextField(
                 hidable: false,
                 validator: null,
-                // validator: (value) {
-                //   if (value != null && value != "") {
-                //     if (EmailValidator.validate(value!)) {
-                //     } else {
-                //       return 'err';
-                //     }
-                //   }
-                //   return 'err';
-                // },
                 header: "Email adress",
                 formatters: const [
                   //idk how to make it
                 ],
                 keyboardtype: TextInputType.emailAddress,
                 hint: "*********@gmail.com",
-                controller: _fioController,
+                controller: _emailController,
               ),
               const SizedBox(
                 height: 20,
@@ -117,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 formatters: const [],
                 keyboardtype: TextInputType.phone,
                 hint: "********",
-                controller: _fioController,
+                controller: _passwordController,
               ),
               const SizedBox(
                 height: 20,
@@ -129,7 +175,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 formatters: const [],
                 keyboardtype: TextInputType.none,
                 hint: "********",
-                controller: _fioController,
+                controller: _confirmPasswordController,
               ),
               const SizedBox(
                 height: 35,
@@ -149,9 +195,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           activeColor: Theme.of(context).colorScheme.primary,
                           value: termCB,
                           onChanged: (value) {
-                            setState(() {
-                              termCB = value ?? false;
-                            });
+                            termCB = value!;
+                            _checkCorrect();
                           }),
                     ),
                     const SizedBox(
@@ -187,10 +232,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 60,
               ),
               MyButtonFilled(
-                  enabled: false,
+                  enabled: correct,
                   onClick: () {
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .switchTheme();
+                    _signUp();
                   },
                   width: double.infinity,
                   height: 45,
@@ -208,10 +252,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LoginScreen()));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
                             },
                           text: "Sign in",
                           style: TextStyle(

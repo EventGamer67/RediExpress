@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,14 +15,20 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  late final TextEditingController _fioController;
+  late final TextEditingController _emailController;
   bool termCB = false;
+  bool correct = false;
 
   @override
   void initState() {
-    _fioController = TextEditingController();
+    _emailController = TextEditingController();
     super.initState();
+  }
 
+  _checkCorrect() {
+    setState(() {
+      correct = EmailValidator.validate(_emailController.text);
+    });
   }
 
   @override
@@ -32,6 +39,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         padding: const EdgeInsets.all(24.0),
         child: Form(
           autovalidateMode: AutovalidateMode.always,
+          onChanged: () {
+            _checkCorrect();
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -77,20 +87,27 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ],
                 keyboardtype: TextInputType.emailAddress,
                 hint: "*********@gmail.com",
-                controller: _fioController,
+                controller: _emailController,
               ),
               const SizedBox(
                 height: 56,
               ),
               MyButtonFilled(
-                  enabled: true,
+                  enabled: correct,
                   onClick: () async {
-                    try{
-                      final client = GetIt.I.get<Supabase>().client;
-                      await client.auth.resetPasswordForEmail('eventgamer67danil@yandex.ru');
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OTPScreen() ));
-                    }catch(err){
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.toString())));
+                    try {
+                      if (EmailValidator.validate(_emailController.text)) {
+                        final client = GetIt.I.get<Supabase>().client;
+                        await client.auth
+                            .signInWithOtp(email: _emailController.text);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => OTPScreen(
+                                  email: _emailController.text,
+                                )));
+                      }
+                    } catch (err) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(err.toString())));
                     }
                   },
                   width: double.infinity,
