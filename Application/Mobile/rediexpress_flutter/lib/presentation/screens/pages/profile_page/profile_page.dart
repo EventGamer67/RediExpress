@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/Data/profile/profile_list_data.dart';
+import 'package:rediexpress_flutter/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:rediexpress_flutter/presentation/screens/pages/add_payment_method.dart';
 import 'package:rediexpress_flutter/presentation/screens/pages/notification_page.dart';
 import 'package:rediexpress_flutter/presentation/screens/pages/profile_page/profile_list_tile.dart';
@@ -13,6 +15,7 @@ import 'package:rediexpress_flutter/presentation/screens/pages/profile_page/togg
 import 'package:rediexpress_flutter/presentation/screens/pages/profile_page/profile_info_block.dart';
 
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -23,7 +26,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late bool isDarkTheme;
-  
+
   List<ProfileListTileData> datatiles = [
     ProfileListTileData(
         title: "Edit profile",
@@ -77,7 +80,11 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  void logout() {}
+  void logout() {
+    GetIt.I.get<Supabase>().client.auth.signOut(scope: SignOutScope.global);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => OnboardingScreen()), (route) => false );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -191,4 +198,3 @@ class ProfileListTileLogout extends StatelessWidget {
     );
   }
 }
-

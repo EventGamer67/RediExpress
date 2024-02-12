@@ -121,12 +121,15 @@ class CustomMap extends StatelessWidget {
       child: FlutterMap(
         options: const MapOptions(
           initialCenter: LatLng(51.509364, -0.128928),
-          initialZoom: 0.2,
+          initialZoom: 1.0,
         ),
         children: [
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.app',
+          ColorFiltered(
+            colorFilter: ColorFilter.mode(Colors.grey.shade50.withOpacity(1), BlendMode.saturation),
+            child: TileLayer(
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              userAgentPackageName: 'com.example.app',
+            ),
           ),
           PolylineLayer(polylines: [
             Polyline(

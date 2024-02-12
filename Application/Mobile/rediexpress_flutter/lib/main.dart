@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/presentation/screens/home_screen/home_screen.dart';
+import 'package:rediexpress_flutter/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetIt.I.get<Talker>().debug(GetIt.I.get<Supabase>().client.auth.currentSession);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeProvider>(
@@ -35,8 +37,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: Provider.of<ThemeProvider>(context).theme,
-          home: const HomeScreen(startpage: 0,)
-          //home: const SplashScreen(),
+          //home: const HomeScreen(startpage: 0,)
+          home: const SplashScreen(),
         );
       },
     );

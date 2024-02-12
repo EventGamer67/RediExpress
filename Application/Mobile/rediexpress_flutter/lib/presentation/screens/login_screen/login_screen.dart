@@ -1,11 +1,16 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rediexpress_flutter/presentation/screens/forgotpassword_screen/forgotpassword_screen.dart';
+import 'package:rediexpress_flutter/presentation/screens/home_screen/home_screen.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_button_filled.dart';
 import 'package:rediexpress_flutter/presentation/widgets/my_textfield.dart';
 import 'package:rediexpress_flutter/providers/theme/theme_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,13 +20,33 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late final TextEditingController _fioController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
   bool termCB = false;
+
+  bool correct = false;
 
   @override
   void initState() {
-    _fioController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
     super.initState();
+  }
+
+  _sign() async {
+    try {
+      final supa = GetIt.I.get<Supabase>();
+      AuthResponse res = await supa.client.auth.signUp(
+          password: _passwordController.text, email: _emailController.text);
+      GetIt.I.get<Talker>().good(res.session);
+      if (res.session != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen(startpage: 0)));
+      }
+    } catch (err) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(err.toString())));
+    }
   }
 
   @override
@@ -31,6 +56,17 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Form(
+          onChanged: () {
+            bool emailcorrect = EmailValidator.validate(_emailController.text);
+            if (emailcorrect) {
+              String sample = _emailController.text.split('@')[1].split('.')[0];
+              if (sample.toLowerCase() == sample) {
+                setState(() {
+                  correct = emailcorrect;
+                });
+              }
+            }
+          },
           autovalidateMode: AutovalidateMode.always,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
                 keyboardtype: TextInputType.emailAddress,
                 hint: "*********@gmail.com",
-                controller: _fioController,
+                controller: _emailController,
               ),
               const SizedBox(
                 height: 20,
@@ -87,9 +123,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 hidable: true,
                 header: "Password",
                 formatters: const [],
-                keyboardtype: TextInputType.phone,
+                keyboardtype: TextInputType.text,
                 hint: "********",
-                controller: _fioController,
+                controller: _passwordController,
               ),
               const SizedBox(
                 height: 20,
@@ -130,8 +166,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const ForgotPasswordScreen() ));
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                const ForgotPasswordScreen()));
                       },
                       child: Text(
                         'Forgot Password?',
@@ -147,10 +185,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 190,
               ),
               MyButtonFilled(
-                  enabled: false,
+                  enabled: correct,
                   onClick: () {
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .switchTheme();
+                    _sign();
                   },
                   width: double.infinity,
                   height: 45,

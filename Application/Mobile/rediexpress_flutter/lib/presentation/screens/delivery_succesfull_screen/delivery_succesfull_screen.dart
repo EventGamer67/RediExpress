@@ -45,14 +45,13 @@ class _DeliverySuccesfullScreenState extends State<DeliverySuccesfullScreen>
   _trackGyro(GyroscopeEvent event) {
     final double y = event.y.floor().toDouble();
     if (y != 0.0) {
-      GetIt.I.get<Talker>().good(y);
-      if (y > 2 && !alreadyStared) {
+      if (y > 4 && !alreadyStared) {
         alreadyStared = true;
         setState(() {
           starts = math.min(5, starts + 1);
         });
       }
-      if (y < -2 && !alreadyStared) {
+      if (y < -4 && !alreadyStared) {
         alreadyStared = true;
         setState(() {
           starts = math.max(0, starts - 1);

@@ -36,13 +36,11 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: PageView(
-            controller: pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            onPageChanged: (value) {},
-            children: pages),
-      ),
+      body: PageView(
+          controller: pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (value) {},
+          children: pages),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
         type: BottomNavigationBarType.fixed,
