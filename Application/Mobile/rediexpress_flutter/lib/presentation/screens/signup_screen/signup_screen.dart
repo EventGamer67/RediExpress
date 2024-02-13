@@ -86,6 +86,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     GetIt.I.get<Talker>().good(response.user);
   }
 
+  _googleSign() async {
+    GetIt.I.get<Talker>().debug("msg");
+    Supabase sup = GetIt.I.get<Supabase>();
+    bool res = await sup.client.auth.signInWithOAuth(OAuthProvider.google);
+    GetIt.I.get<Talker>().debug(res);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -264,22 +271,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 17,
               ),
-              RichText(
-                text: const TextSpan(
-                    text: "Or sign in using",
-                    style: TextStyle(
-                        color: Color(0xFFA6A6A6), fontWeight: FontWeight.w400),
-                    children: []),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: SvgPicture.asset(
-                    'assets/svg/vuesax/linear/Facebook google, apple.svg',
-                  ))
+              GestureDetector(
+                onTap: () {
+                  _googleSign();
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    RichText(
+                      text: const TextSpan(
+                          text: "Or sign in using",
+                          style: TextStyle(
+                              color: Color(0xFFA6A6A6),
+                              fontWeight: FontWeight.w400),
+                          children: []),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: SvgPicture.asset(
+                          'assets/svg/vuesax/linear/Facebook google, apple.svg',
+                        ))
+                  ],
+                ),
+              )
             ],
           ),
         ),

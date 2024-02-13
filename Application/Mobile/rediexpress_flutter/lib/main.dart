@@ -13,8 +13,8 @@ void main() async {
 
   GetIt.I.registerSingleton<Talker>(talker);
 
-  const url = 'https://ojbsikxdqcbuvamygezd.supabase.co';
-  const anonkey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYnNpa3hkcWNidXZhbXlnZXpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDE4MDY4OTgsImV4cCI6MjAxNzM4Mjg5OH0.jV7YiBEePGjybsL8qqXWeQ9PX8_3yctpq14Gfwh39JM';
+  const url = 'https://nhqkdabncpfkducyfdzw.supabase.co';
+  const anonkey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ocWtkYWJuY3Bma2R1Y3lmZHp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDcyMDY5OTgsImV4cCI6MjAyMjc4Mjk5OH0.bPsz10JKZPuvzJquNhKCFch9-6AfzQuZhUUfivo7WZU';
 
   final Supabase supa = await Supabase.initialize(url: url, anonKey: anonkey);
   GetIt.I.registerSingleton<Supabase>(supa);

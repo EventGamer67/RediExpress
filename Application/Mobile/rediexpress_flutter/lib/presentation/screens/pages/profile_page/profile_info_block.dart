@@ -33,16 +33,16 @@ class _ProfileInfoBlockState extends State<ProfileInfoBlock> {
               onTap: () async {
                 var picker = ImagePicker();
                 try {
-                XFile? file =
-                    await picker.pickImage(source: ImageSource.camera);
-                GetIt.I.get<Talker>().good(file);
-                String res = await file!.readAsString(encoding: utf8);
-                GetIt.I.get<Talker>().good(res);
-                } catch(e) {
+                  XFile? file =
+                      await picker.pickImage(source: ImageSource.camera);
+                  GetIt.I.get<Talker>().good(file);
+                  String res = await file!.readAsString(encoding: utf8);
+                  GetIt.I.get<Talker>().good(res);
+                } catch (e) {
                   GetIt.I.get<Talker>().error(e);
                 }
               },
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 radius: 30,
                 foregroundImage:
                     NetworkImage("https://via.placeholder.com/60x60"),
